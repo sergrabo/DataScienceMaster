@@ -1,0 +1,1168 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Estad?stica\_Parte1\_Bramowicz\_Szymon}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Bramowicz Szymon}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} note: the code was written in RStudio}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Práctica 1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Problema 1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} data \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{players\PYZus{}stats.csv\PYZdq{}}\PY{p}{)}
+        
+        hist\PY{p}{(}data\PY{o}{\PYZdl{}}Height\PY{p}{,}
+             las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+             xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Height\PYZdq{}}\PY{p}{,}
+             main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Height of the NBA players\PYZdq{}}\PY{p}{,}\PY{p}{)}
+        
+        avg\PYZus{}height \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{mean}\PY{p}{(}data\PY{o}{\PYZdl{}}Height\PY{p}{,} na.rm \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+        
+        abline\PY{p}{(}v \PY{o}{=} avg\PYZus{}height\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,} lwd \PY{o}{=} \PY{l+m}{2}\PY{p}{)}
+        sd\PYZus{}height \PY{o}{=} sd\PY{p}{(}data\PY{o}{\PYZdl{}}Height\PY{p}{,} na.rm \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+        abline\PY{p}{(}v \PY{o}{=} \PY{p}{(}avg\PYZus{}height\PY{o}{\PYZhy{}}sd\PYZus{}height\PY{p}{)}\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,} lwd \PY{o}{=} \PY{l+m}{1}\PY{p}{)}
+        abline\PY{p}{(}v \PY{o}{=} \PY{p}{(}avg\PYZus{}height\PY{o}{+}sd\PYZus{}height\PY{p}{)}\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,} lwd \PY{o}{=} \PY{l+m}{1}\PY{p}{)}
+        legend\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{topright\PYZdq{}}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Mean\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Std Dev\PYZdq{}}\PY{p}{)}\PY{p}{,} col\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}\PY{p}{,} lwd\PY{o}{=}\PY{l+m}{4}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} The average height is around 197cm, and most players fall within the range established by the standard deviation.}
+        \PY{c+c1}{\PYZsh{} No known distribution can be seen at a glance in the graph.}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Problema 2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} data \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{readLines}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{N\PYZus{}seaice\PYZus{}extent\PYZus{}daily\PYZus{}v3.0.csv\PYZdq{}}\PY{p}{)}
+        skip\PYZus{}second \PY{o}{\PYZlt{}\PYZhy{}} data\PY{p}{[}\PY{l+m}{\PYZhy{}2}\PY{p}{]}
+        seaice \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{k+kp}{textConnection}\PY{p}{(}skip\PYZus{}second\PY{p}{)}\PY{p}{)}
+        
+        min\PYZus{}month \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+        max\PYZus{}month \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+        k \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{1}
+        \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1978}\PY{o}{:}\PY{l+m}{2021}\PY{p}{)} \PY{p}{\PYZob{}}
+          sub\PYZus{}year\PY{o}{\PYZlt{}\PYZhy{}}\PY{k+kp}{subset}\PY{p}{(}seaice\PY{p}{,} Year\PY{o}{==}i\PY{p}{)}
+          min\PYZus{}month\PY{p}{[}k\PY{p}{]} \PY{o}{=} sub\PYZus{}year\PY{o}{\PYZdl{}}Month\PY{p}{[}\PY{k+kp}{which.max}\PY{p}{(}sub\PYZus{}year\PY{o}{\PYZdl{}}Extent\PY{p}{)}\PY{p}{]}
+          max\PYZus{}month\PY{p}{[}k\PY{p}{]} \PY{o}{=} sub\PYZus{}year\PY{o}{\PYZdl{}}Month\PY{p}{[}\PY{k+kp}{which.min}\PY{p}{(}sub\PYZus{}year\PY{o}{\PYZdl{}}Extent\PY{p}{)}\PY{p}{]}
+          k\PY{o}{=}k\PY{l+m}{+1}
+        \PY{p}{\PYZcb{}}
+        \PY{k+kt}{matrix} \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}min\PYZus{}month\PY{p}{,}max\PYZus{}month\PY{p}{)}
+        \PY{k+kp}{rownames}\PY{p}{(}\PY{k+kt}{matrix}\PY{p}{)} \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{1978}\PY{o}{:}\PY{l+m}{2021}
+        
+        plot\PY{p}{(}x \PY{o}{=} \PY{k+kp}{seq}\PY{p}{(}\PY{l+m}{1978}\PY{p}{,} \PY{l+m}{2021}\PY{p}{)}\PY{p}{,} 
+             y \PY{o}{=} min\PYZus{}month\PY{p}{,}
+             ylim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,} \PY{l+m}{12}\PY{p}{)}\PY{p}{,}
+             las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+             xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Year\PYZdq{}}\PY{p}{,}
+             ylab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Min month\PYZdq{}}\PY{p}{,}
+             main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Month in which the extension has been at its minimum\PYZdq{}}
+            \PY{p}{)}
+        
+        plot\PY{p}{(}x \PY{o}{=} \PY{k+kp}{seq}\PY{p}{(}\PY{l+m}{1978}\PY{p}{,} \PY{l+m}{2021}\PY{p}{)}\PY{p}{,} 
+             y \PY{o}{=} max\PYZus{}month\PY{p}{,}
+             ylim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,} \PY{l+m}{12}\PY{p}{)}\PY{p}{,}
+             las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+             xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Year\PYZdq{}}\PY{p}{,}
+             ylab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Max month\PYZdq{}}\PY{p}{,}
+             main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Month in which the extension has been at its maximum\PYZdq{}}
+            \PY{p}{)}
+        
+        \PY{k+kn}{library}\PY{p}{(}dplyr\PY{p}{)}
+        
+        seaice2 \PY{o}{\PYZlt{}\PYZhy{}}seaice\PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          group\PYZus{}by\PY{p}{(}Month\PY{p}{)}\PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} 
+          summarise\PY{p}{(}Median \PY{o}{=} median\PY{p}{(}Extent\PY{p}{)}\PY{p}{,} q5 \PY{o}{=} quantile\PY{p}{(}Extent\PY{p}{,} probs \PY{o}{=} \PY{l+m}{0.05}\PY{p}{)}\PY{p}{,} q95 \PY{o}{=} quantile\PY{p}{(}Extent\PY{p}{,} probs \PY{o}{=} \PY{l+m}{0.95}\PY{p}{)}\PY{p}{)}
+        
+        plot\PY{p}{(}seaice2\PY{o}{\PYZdl{}}Median\PY{p}{,}
+             ylim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{16}\PY{p}{)}\PY{p}{,}
+             las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+             xlab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Month\PYZdq{}}\PY{p}{,}
+             ylab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Median\PYZdq{}}\PY{p}{,}
+             main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Median extension over the year\PYZdq{}}\PY{p}{)}
+        
+        lines\PY{p}{(}seaice2\PY{o}{\PYZdl{}}q5\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{darkgray\PYZdq{}}\PY{p}{)}
+        lines\PY{p}{(}seaice2\PY{o}{\PYZdl{}}q95\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{darkgray\PYZdq{}}\PY{p}{)}
+        polygon\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}seaice2\PY{o}{\PYZdl{}}Month\PY{p}{,} \PY{k+kp}{rev}\PY{p}{(}seaice2\PY{o}{\PYZdl{}}Month\PY{p}{)}\PY{p}{)}\PY{p}{,} 
+                \PY{k+kt}{c}\PY{p}{(}seaice2\PY{o}{\PYZdl{}}q95\PY{p}{,} \PY{k+kp}{rev}\PY{p}{(}seaice2\PY{o}{\PYZdl{}}q5\PY{p}{)}\PY{p}{)}\PY{p}{,} 
+                col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{lightgray\PYZdq{}}\PY{p}{,} density \PY{o}{=} \PY{l+m}{10}\PY{p}{,} border \PY{o}{=} \PY{k+kc}{NA}\PY{p}{)}
+        
+        seaice2021 \PY{o}{\PYZlt{}\PYZhy{}} filter\PY{p}{(}seaice\PY{p}{,} Year \PY{o}{==} \PY{l+m}{2021}\PY{p}{)}
+        seaice2021x \PY{o}{\PYZlt{}\PYZhy{}} seaice2021\PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          group\PYZus{}by\PY{p}{(}Month\PY{p}{)}\PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} 
+          summarise\PY{p}{(}Median \PY{o}{=} median\PY{p}{(}Extent\PY{p}{)}\PY{p}{)}
+        
+        seaice2012 \PY{o}{\PYZlt{}\PYZhy{}} filter\PY{p}{(}seaice\PY{p}{,} Year \PY{o}{==} \PY{l+m}{2012}\PY{p}{)}
+        seaice2012x \PY{o}{\PYZlt{}\PYZhy{}} seaice2012\PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          group\PYZus{}by\PY{p}{(}Month\PY{p}{)}\PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          summarize\PY{p}{(}Median \PY{o}{=} median\PY{p}{(}Extent\PY{p}{)}\PY{p}{)}
+        
+        lines\PY{p}{(}seaice2012x\PY{o}{\PYZdl{}}Median\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}
+        lines\PY{p}{(}seaice2021x\PY{o}{\PYZdl{}}Median\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+        legend\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{bottomleft\PYZdq{}}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{2012\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{2021\PYZdq{}}\PY{p}{)}\PY{p}{,} col \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}\PY{p}{,} lwd \PY{o}{=} \PY{l+m}{4}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Median extent of the ice is getting smaller over the years and is dropping rapidly over the last decade}
+        \PY{c+c1}{\PYZsh{} However, it is still between 5\PYZpc{} and 95\PYZpc{} percentiles, except for 2 months in 2012.}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Attaching package: ‘dplyr’
+
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+`summarise()` ungrouping output (override with `.groups` argument)
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+`summarise()` ungrouping output (override with `.groups` argument)
+
+`summarise()` ungrouping output (override with `.groups` argument)
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Práctica 2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Problema 1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} tries \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{seq}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{10}\PY{p}{)}
+         n \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{10}
+         p \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{.2}
+         
+         prob \PY{o}{\PYZlt{}\PYZhy{}} dbinom\PY{p}{(}tries\PY{p}{,} n\PY{p}{,} p\PY{p}{)}
+         plot\PY{p}{(}prob\PY{p}{,}
+              las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+              xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{No of questions\PYZdq{}}\PY{p}{,}
+              ylab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Probability\PYZdq{}}\PY{p}{,}
+              main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Probability distribution\PYZdq{}}\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{most probable no of correct answers:\PYZdq{}}\PY{p}{,} \PY{k+kp}{which.max}\PY{p}{(}prob\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} \PYZdq{}\PYZhy{} 1\PYZdq{} because 1 means 0 good answers}
+         \PY{c+c1}{\PYZsh{} most probable is getting 2 good answers}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{sum of probabilites:\PYZdq{}}\PY{p}{,}\PY{k+kp}{sum}\PY{p}{(}prob\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} sum is 1 because these are all possible options to get, so it\PYZsq{}s natural to sum up to a 100\PYZpc{}}
+         
+         
+         
+         ex \PY{o}{\PYZlt{}\PYZhy{}} n\PY{o}{*}p
+         sdx \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sqrt}\PY{p}{(}n \PY{o}{*} p \PY{o}{*} \PY{p}{(}\PY{l+m}{1} \PY{o}{\PYZhy{}} p\PY{p}{)}\PY{p}{)}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ii)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Expected value:\PYZdq{}}\PY{p}{,} ex\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Standard Deviation\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}sdx\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} expected number of correct answers from the test is 2, with standard deviation \PYZti{}1.26}
+         
+         reward \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{1}
+         penalty \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{\PYZhy{}0.25}
+         e\PYZus{}point \PY{o}{\PYZlt{}\PYZhy{}} \PY{p}{(}reward\PY{o}{*}p\PY{p}{)} \PY{o}{+} \PY{p}{(}penalty \PY{o}{*} \PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}p\PY{p}{)}\PY{p}{)}
+         edx1 \PY{o}{\PYZlt{}\PYZhy{}} n \PY{o}{*} e\PYZus{}point
+         sdx1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sqrt}\PY{p}{(}n\PY{p}{)} \PY{o}{*} \PY{k+kp}{abs}\PY{p}{(}penalty\PY{o}{\PYZhy{}}reward\PY{p}{)} \PY{o}{*} \PY{k+kp}{sqrt}\PY{p}{(}p\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}p\PY{p}{)}\PY{p}{)}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{iii)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Expected value:\PYZdq{}}\PY{p}{,} edx1\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Standard Deviation:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}sdx1\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'most probable no of correct answers:'
+\item '2'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'sum of probabilites:'
+\item '1'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'ii)'
+\item 'Expected value:'
+\item '2'
+\item 'Standard Deviation'
+\item '1.26'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'iii)'
+\item 'Expected value:'
+\item '0'
+\item 'Standard Deviation:'
+\item '1.58'
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Problema 2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} data \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{results.csv\PYZdq{}}\PY{p}{,} header \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+         data\PYZus{}spain \PY{o}{\PYZlt{}\PYZhy{}} filter\PY{p}{(}data\PY{p}{,} home\PYZus{}team \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{Spain\PYZdq{}}\PY{p}{)}
+         
+         hist\PY{p}{(}data\PYZus{}spain\PY{o}{\PYZdl{}}home\PYZus{}score\PY{p}{,}
+              xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{No of home goals scored\PYZdq{}}\PY{p}{,}
+              las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+              main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Histogram of home goals scored by Spain\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} I\PYZsq{}d use Poisson distribution based on the histogram}
+         
+         avg\PYZus{}goals \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{mean}\PY{p}{(}data\PYZus{}spain\PY{o}{\PYZdl{}}home\PYZus{}score\PY{p}{)}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Probability of scoring 3 or more goals:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}ppois\PY{p}{(}\PY{l+m}{3}\PY{p}{,} avg\PYZus{}goals\PY{p}{,} lower.tail \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         
+         goals\PYZus{}from\PYZus{}0 \PY{o}{\PYZlt{}\PYZhy{}} dpois\PY{p}{(}\PY{l+m}{0}\PY{o}{:}\PY{l+m}{10}\PY{p}{,} avg\PYZus{}goals\PY{p}{)}
+         plot\PY{p}{(}goals\PYZus{}from\PYZus{}0\PY{p}{,} las \PY{o}{=} \PY{l+m}{1}\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Most probable no of home goals scored:\PYZdq{}}\PY{p}{,} \PY{k+kp}{which.max}\PY{p}{(}goals\PYZus{}from\PYZus{}0\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Spain shooting 2 goals is the most probable scenario}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total probability:\PYZdq{}}\PY{p}{,} \PY{k+kp}{sum}\PY{p}{(}goals\PYZus{}from\PYZus{}0\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} sum of the probability of the 11 events is equal to 0.9999635. }
+         \PY{c+c1}{\PYZsh{} It is not 1 because exists a possibility to shoot more than 10 goals}
+         
+         goals\PYZus{}shot \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{o}{:}\PY{l+m}{10}\PY{p}{)}
+         ex \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{mean}\PY{p}{(}data\PYZus{}spain\PY{o}{\PYZdl{}}home\PYZus{}score\PY{p}{)}
+         sd \PY{o}{\PYZlt{}\PYZhy{}} sd\PY{p}{(}data\PYZus{}spain\PY{o}{\PYZdl{}}home\PYZus{}score\PY{p}{)}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Expected value:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}ex\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Standard Deviation:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}sd\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Expected value is the average value of goals scored, SD is high because of the small sample and big discrepancy.}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'Probability of scoring 3 or more goals:'
+\item '0.21'
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate*}
+\item 'Most probable no of home goals scored:'
+\item '2'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'Total probability:'
+\item '0.999963531335208'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'Expected value:'
+\item '2.36'
+\item 'Standard Deviation:'
+\item '1.97'
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Problema 3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} avg \PY{o}{=} \PY{l+m}{180}
+         sd \PY{o}{=} \PY{l+m}{25}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Probability of having more than 225 mg/dL of cholesterol:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{l+m}{1} \PY{o}{\PYZhy{}} pnorm\PY{p}{(}\PY{l+m}{225}\PY{p}{,} avg\PY{p}{,} sd\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         
+         p \PY{o}{=} \PY{l+m}{.95}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Percentil 95\PYZpc{}:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}qnorm\PY{p}{(}p\PY{p}{,} avg\PY{p}{,} sd\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         
+         data \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{seq}\PY{p}{(}avg \PY{o}{\PYZhy{}} \PY{l+m}{3}\PY{o}{*} sd\PY{p}{,} avg \PY{o}{+} \PY{l+m}{3} \PY{o}{*} sd\PY{p}{,} length \PY{o}{=} \PY{l+m}{1000}\PY{p}{)}
+         dens \PY{o}{=} dnorm\PY{p}{(}data\PY{p}{,} avg\PY{p}{,} sd\PY{p}{)}
+         dist \PY{o}{=} pnorm\PY{p}{(}data\PY{p}{,} avg\PY{p}{,} sd\PY{p}{)}
+         
+         par\PY{p}{(}mfrow \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         plot\PY{p}{(}data\PY{p}{,} dens\PY{p}{,} ylab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{density\PYZdq{}}\PY{p}{,} las \PY{o}{=} \PY{l+m}{1}\PY{p}{)}
+         plot\PY{p}{(}data\PY{p}{,} dist\PY{p}{,} ylab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{distribution\PYZdq{}}\PY{p}{,} las \PY{o}{=} \PY{l+m}{1}\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Expected value:\PYZdq{}}\PY{p}{,} avg\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Standard Deviation:\PYZdq{}}\PY{p}{,} sd\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'Probability of having more than 225 mg/dL of cholesterol:'
+\item '0.04'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'Percentil 95\%:'
+\item '221.12'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'Expected value:'
+\item '180'
+\item 'Standard Deviation:'
+\item '25'
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Práctica 3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Problema 1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{i)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X):\PYZdq{}}\PY{p}{,} \PY{l+m}{100}\PY{o}{/}\PY{l+m}{2}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{l+m}{100}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{12}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'i)'
+\item 'E(X):'
+\item '50'
+\item 'Var(X):'
+\item '833.33'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ii)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{mean:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{mean}\PY{p}{(}runif\PY{p}{(}\PY{l+m}{30}\PY{p}{,} \PY{l+m}{0}\PY{p}{,} \PY{l+m}{100}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{variance:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}var\PY{p}{(}runif\PY{p}{(}\PY{l+m}{30}\PY{p}{,} \PY{l+m}{0}\PY{p}{,} \PY{l+m}{100}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'ii)'
+\item 'mean:'
+\item '55.13'
+\item 'variance:'
+\item '809.08'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{iii)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X):\PYZdq{}}\PY{p}{,} \PY{l+m}{50}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var30:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{l+m}{100}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{12}\PY{o}{/}\PY{l+m}{30}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var100:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{l+m}{100}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{12}\PY{o}{/}\PY{l+m}{100}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'iii)'
+\item 'E(X):'
+\item '50'
+\item 'Var30:'
+\item '27.78'
+\item 'Var100:'
+\item '8.33'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kt}{matrix} \PY{o}{=} \PY{k+kt}{matrix}\PY{p}{(}data \PY{o}{=} \PY{k+kc}{NA}\PY{p}{,} nrow \PY{o}{=} \PY{l+m}{30}\PY{p}{,} ncol \PY{o}{=} \PY{l+m}{500}\PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{500}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+             \PY{k+kt}{matrix}\PY{p}{[}\PY{p}{,} i\PY{p}{]} \PY{o}{=} runif\PY{p}{(}\PY{l+m}{30}\PY{p}{,} \PY{l+m}{0}\PY{p}{,} \PY{l+m}{100}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{} iv)}
+         mean\PYZus{}by\PYZus{}col\PYZus{}30 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{colMeans}\PY{p}{(}\PY{k+kt}{matrix}\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{v)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{mean (30):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{mean}\PY{p}{(}mean\PYZus{}by\PYZus{}col\PYZus{}30\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{variance (30):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}var\PY{p}{(}mean\PYZus{}by\PYZus{}col\PYZus{}30\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} similar results to theoritical}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'v)'
+\item 'mean (30):'
+\item '50.04'
+\item 'variance (30):'
+\item '27.41'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kt}{matrix} \PY{o}{=} \PY{k+kt}{matrix}\PY{p}{(}data \PY{o}{=} \PY{k+kc}{NA}\PY{p}{,} nrow \PY{o}{=} \PY{l+m}{100}\PY{p}{,} ncol \PY{o}{=} \PY{l+m}{500}\PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{500}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+             \PY{k+kt}{matrix}\PY{p}{[}\PY{p}{,} i\PY{p}{]} \PY{o}{=} runif\PY{p}{(}\PY{l+m}{100}\PY{p}{,} \PY{l+m}{0}\PY{p}{,} \PY{l+m}{100}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         mean\PYZus{}by\PYZus{}col\PYZus{}100 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{colMeans}\PY{p}{(}\PY{k+kt}{matrix}\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{vi)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{mean (100):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{mean}\PY{p}{(}mean\PYZus{}by\PYZus{}col\PYZus{}100\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{variance (100):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}var\PY{p}{(}mean\PYZus{}by\PYZus{}col\PYZus{}100\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} similar results to theoretical}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'vi)'
+\item 'mean (100):'
+\item '49.98'
+\item 'variance (100):'
+\item '8.88'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} seq \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{seq}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{100}\PY{p}{,} by \PY{o}{=} \PY{l+m}{.1}\PY{p}{)}
+         y30 \PY{o}{\PYZlt{}\PYZhy{}} dnorm\PY{p}{(}\PY{k+kp}{seq}\PY{p}{,} mean \PY{o}{=} \PY{l+m}{50}\PY{p}{,} sd \PY{o}{=} \PY{k+kp}{sqrt}\PY{p}{(}\PY{l+m}{100}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{12}\PY{o}{/}\PY{l+m}{30}\PY{p}{)}\PY{p}{)}
+         y100 \PY{o}{\PYZlt{}\PYZhy{}} dnorm\PY{p}{(}\PY{k+kp}{seq}\PY{p}{,} mean \PY{o}{=} \PY{l+m}{50}\PY{p}{,} sd \PY{o}{=} \PY{k+kp}{sqrt}\PY{p}{(}\PY{l+m}{100}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{12}\PY{o}{/}\PY{l+m}{100}\PY{p}{)}\PY{p}{)}
+         
+         par\PY{p}{(}mfrow \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}\PY{p}{)}
+         
+         hist\PY{p}{(}mean\PYZus{}by\PYZus{}col\PYZus{}30\PY{p}{,} 
+              freq \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{,}
+              xlim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{100}\PY{p}{)}\PY{p}{,}
+              las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+              xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{time in mins\PYZdq{}}\PY{p}{,}
+              main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{n = 30\PYZdq{}}\PY{p}{)}
+         
+         lines\PY{p}{(}\PY{k+kp}{seq}\PY{p}{,} y30\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}
+         
+         hist\PY{p}{(}mean\PYZus{}by\PYZus{}col\PYZus{}100\PY{p}{,} 
+              freq \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{,}
+              xlim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{100}\PY{p}{)}\PY{p}{,}
+              las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+              xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{time in mins\PYZdq{}}\PY{p}{,}
+              main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{n = 1000\PYZdq{}}\PY{p}{)}
+         
+         lines\PY{p}{(}\PY{k+kp}{seq}\PY{p}{,} y100\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} the more data, the more it fits the normal distribution}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Práctica 4}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Problema 1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{i)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{theoretical probability:\PYZdq{}}\PY{p}{,} \PY{l+m}{1}\PY{o}{/}\PY{l+m}{4}\PY{p}{)}
+         
+         n \PY{o}{=} \PY{l+m}{10000}
+         random \PY{o}{=} runif\PY{p}{(}n\PY{p}{)}
+         p \PY{o}{=} \PY{l+m}{1}\PY{o}{/}\PY{l+m}{4}
+         bastos \PY{o}{=} \PY{l+m}{0}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}n\PY{p}{)}\PY{p}{\PYZob{}}
+             \PY{k+kr}{if}\PY{p}{(}random\PY{p}{[}i\PY{p}{]} \PY{o}{\PYZlt{}} p\PY{p}{)}\PY{p}{\PYZob{}}
+                 bastos \PY{o}{=} bastos \PY{o}{+} \PY{l+m}{1}
+             \PY{p}{\PYZcb{}}
+         \PY{p}{\PYZcb{}}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{probability after n rounds:\PYZdq{}}\PY{p}{,} bastos\PY{o}{/}n\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'i)'
+\item 'theoretical probability:'
+\item '0.25'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'probability after n rounds:'
+\item '0.2511'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Problema 2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} lambda \PY{o}{=} \PY{l+m}{.01}
+         n \PY{o}{=} \PY{l+m}{1000}
+         
+         x \PY{o}{=} \PY{o}{\PYZhy{}}\PY{k+kp}{log}\PY{p}{(}\PY{l+m}{1} \PY{o}{\PYZhy{}} runif\PY{p}{(}n\PY{p}{)}\PY{p}{)} \PY{o}{/} lambda
+         
+         hist\PY{p}{(}x\PY{p}{,}
+              freq \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{,}
+              main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Probability distribution\PYZdq{}}\PY{p}{,}
+              las \PY{o}{=} \PY{l+m}{1}\PY{p}{)}
+         
+         curve\PY{p}{(}lambda \PY{o}{*} \PY{k+kp}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}lambda \PY{o}{*} x\PY{p}{)}\PY{p}{,} add \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+         
+         legend\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{topright\PYZdq{}}\PY{p}{,} 
+                \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Random distribution\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Theoretical distribution\PYZdq{}}\PY{p}{)}\PY{p}{,}
+                col \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{black\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}\PY{p}{,} 
+                lwd \PY{o}{=} \PY{l+m}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} Problema 3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} The integral of f(x) when = 1 equals K/2, so K = 1}
+         
+         k \PY{o}{=} \PY{l+m}{2}
+         n \PY{o}{=} \PY{l+m}{1000}
+         x \PY{o}{=} \PY{k+kp}{sqrt}\PY{p}{(}\PY{l+m}{1} \PY{o}{/} \PY{p}{(}\PY{l+m}{1} \PY{o}{\PYZhy{}} \PY{l+m}{2} \PY{o}{*} runif\PY{p}{(}n\PY{p}{)} \PY{o}{/} k\PY{p}{)}\PY{p}{)}
+         
+         hist\PY{p}{(}x\PY{p}{,} freq \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{,} \PY{l+m}{50}\PY{p}{,} xlim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{15}\PY{p}{)}\PY{p}{,} main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Probability distribution\PYZdq{}}\PY{p}{)}
+         curve\PY{p}{(}k \PY{o}{*} x \PY{o}{\PYZca{}} \PY{l+m}{\PYZhy{}3}\PY{p}{,} add \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+         legend\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{topright\PYZdq{}}\PY{p}{,} 
+                \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Random distribution\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Theoretical distribution\PYZdq{}}\PY{p}{)}\PY{p}{,}
+                col \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{black\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}\PY{p}{,} 
+                lwd \PY{o}{=} \PY{l+m}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} Práctica 5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} Problema 1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} data \PY{o}{=} \PY{k+kp}{ceiling}\PY{p}{(}runif\PY{p}{(}\PY{l+m}{50}\PY{p}{,} \PY{l+m}{0}\PY{p}{,} \PY{l+m}{6}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{X¯:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{mean}\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{S\PYZca{}2:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}var\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X):\PYZdq{}}\PY{p}{,} \PY{l+m}{7} \PY{o}{/} \PY{l+m}{2}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X):\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+m}{6} \PY{o}{\PYZca{}} \PY{l+m}{2} \PY{l+m}{\PYZhy{}1}\PY{p}{)} \PY{o}{/} \PY{l+m}{12}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X¯):\PYZdq{}}\PY{p}{,} \PY{l+m}{7} \PY{o}{/} \PY{l+m}{2}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X¯):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{l+m}{6} \PY{o}{\PYZca{}} \PY{l+m}{2} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{p}{)} \PY{o}{/} \PY{l+m}{12}\PY{p}{)} \PY{o}{/} \PY{l+m}{50}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'X¯:'
+\item '3.34'
+\item 'S\textasciicircum{}2:'
+\item '3'
+\item 'E(X):'
+\item '3.5'
+\item 'Var(X):'
+\item '2.91666666666667'
+\item 'E(X¯):'
+\item '3.5'
+\item 'Var(X¯):'
+\item '0.06'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} data \PY{o}{=} \PY{k+kp}{ceiling}\PY{p}{(}runif\PY{p}{(}\PY{l+m}{50}\PY{p}{,} \PY{l+m}{0}\PY{p}{,} \PY{l+m}{6}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{k+kp}{ceiling}\PY{p}{(}runif\PY{p}{(}\PY{l+m}{50}\PY{p}{,} \PY{l+m}{0}\PY{p}{,} \PY{l+m}{6}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{X¯:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{mean}\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{S\PYZca{}2:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}var\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X):\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+m}{7} \PY{o}{/} \PY{l+m}{2}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m}{7} \PY{o}{/} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{p}{(}\PY{l+m}{6} \PY{o}{\PYZca{}} \PY{l+m}{2} \PY{l+m}{\PYZhy{}1}\PY{p}{)} \PY{o}{/} \PY{l+m}{12} \PY{o}{+} \PY{p}{(}\PY{l+m}{6} \PY{o}{\PYZca{}} \PY{l+m}{2} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{p}{)} \PY{o}{/} \PY{l+m}{12}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X¯):\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+m}{7} \PY{o}{/} \PY{l+m}{2}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m}{7} \PY{o}{/} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X¯):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{l+m}{6} \PY{o}{\PYZca{}} \PY{l+m}{2} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{p}{)} \PY{o}{/} \PY{l+m}{12}\PY{p}{)} \PY{o}{/} \PY{l+m}{50}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{l+m}{6} \PY{o}{\PYZca{}} \PY{l+m}{2} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{p}{)} \PY{o}{/} \PY{l+m}{12}\PY{p}{)} \PY{o}{/} \PY{l+m}{50}\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'X¯:'
+\item '7.28'
+\item 'S\textasciicircum{}2:'
+\item '5.92'
+\item 'E(X):'
+\item '7'
+\item 'Var(X):'
+\item '5.83'
+\item 'E(X¯):'
+\item '7'
+\item 'Var(X¯):'
+\item '0.12'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} Problema 3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} n \PY{o}{=} \PY{l+m}{50}
+         avg \PY{o}{=} \PY{l+m}{176}
+         sd \PY{o}{=} \PY{l+m}{11}
+         
+         data \PY{o}{=} rnorm\PY{p}{(}n\PY{p}{,} avg\PY{p}{,} sd\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{X¯:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{mean}\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{S\PYZca{}2:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}var\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X):\PYZdq{}}\PY{p}{,} avg\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}sd \PY{o}{\PYZca{}} \PY{l+m}{2}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X¯):\PYZdq{}}\PY{p}{,} avg\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X¯):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{p}{(}sd \PY{o}{\PYZca{}} \PY{l+m}{2}\PY{p}{)} \PY{o}{/} n\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'X¯:'
+\item '178.13'
+\item 'S\textasciicircum{}2:'
+\item '149.1'
+\item 'E(X):'
+\item '176'
+\item 'Var(X):'
+\item '121'
+\item 'E(X¯):'
+\item '176'
+\item 'Var(X¯):'
+\item '2.42'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} Problema 4}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} n \PY{o}{=} \PY{l+m}{10}
+         v \PY{o}{=} \PY{l+m}{2.8}
+         
+         data \PY{o}{=} rpois\PY{p}{(}n\PY{p}{,} v\PY{p}{)}
+         
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{X¯:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{mean}\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{S\PYZca{}2:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}var\PY{p}{(}data\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X):\PYZdq{}}\PY{p}{,} avg\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}v\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{E(X¯):\PYZdq{}}\PY{p}{,} avg\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Var(X¯):\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}v \PY{o}{/} n\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 'X¯:'
+\item '2.6'
+\item 'S\textasciicircum{}2:'
+\item '4.27'
+\item 'E(X):'
+\item '176'
+\item 'Var(X):'
+\item '2.8'
+\item 'E(X¯):'
+\item '176'
+\item 'Var(X¯):'
+\item '0.28'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} Problema 5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} positions \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sort}\PY{p}{(}\PY{k+kp}{sample}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{64}\PY{p}{,} \PY{l+m}{32}\PY{p}{,} replace \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k+kt}{matrix} \PY{o}{=} \PY{k+kt}{matrix}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{64}\PY{p}{,} nrow \PY{o}{=} \PY{l+m}{8}\PY{p}{,} ncol \PY{o}{=} \PY{l+m}{8}\PY{p}{)}
+         \PY{k+kt}{matrix} \PY{o}{=} \PY{k+kt}{matrix} \PY{o}{\PYZpc{}in\PYZpc{}} positions
+         \PY{k+kt}{matrix} \PY{o}{=} \PY{k+kt}{matrix}\PY{p}{(}\PY{k+kt}{matrix}\PY{p}{,} nrow \PY{o}{=} \PY{l+m}{8}\PY{p}{,} ncol \PY{o}{=} \PY{l+m}{8}\PY{p}{)}
+         
+         image\PY{p}{(}\PY{k+kt}{matrix}\PY{p}{,} col \PY{o}{=} topo.colors\PY{p}{(}\PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Práctica 6}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} Problema 1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} data \PY{o}{=} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{test.txt\PYZdq{}}\PY{p}{,} header \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+         hist\PY{p}{(}data\PY{o}{\PYZdl{}}V1\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} there is a certain probability that these men are cheating because their testosterone levels are usually higher than 600}
+         \PY{c+c1}{\PYZsh{} H0 : There is no doping}
+         \PY{c+c1}{\PYZsh{} H1 : There is doping}
+         alpha \PY{o}{=} \PY{l+m}{.05} \PY{c+c1}{\PYZsh{} standard value}
+         avg \PY{o}{=} \PY{l+m}{600}
+         t.test\PY{p}{(}data\PY{o}{\PYZdl{}}V1\PY{p}{,} mu \PY{o}{=} avg\PY{p}{,} conf.level \PY{o}{=} \PY{l+m}{1} \PY{o}{\PYZhy{}} alpha\PY{p}{,} alternative \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{greater\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} p\PYZhy{}value is smaller than alpha, thus rejection of H0 that there is no doping}
+         
+         sd \PY{o}{=} \PY{l+m}{200}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{iii)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Probability of no\PYZhy{}doping equals:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}pnorm\PY{p}{(}\PY{l+m}{1000}\PY{p}{,} avg\PY{p}{,} sd\PY{p}{,} lower.tail \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         
+         alpha \PY{o}{=} \PY{l+m}{1} \PY{o}{/} \PY{l+m}{20000}
+         \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{iv)\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{I choose testosteron at the level:\PYZdq{}}\PY{p}{,} \PY{k+kp}{round}\PY{p}{(}qnorm\PY{p}{(}\PY{l+m}{1} \PY{o}{\PYZhy{}} alpha\PY{p}{,} avg\PY{p}{,} sd\PY{p}{)}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+	One Sample t-test
+
+data:  data$V1
+t = 3.1449, df = 29, p-value = 0.001909
+alternative hypothesis: true mean is greater than 600
+95 percent confidence interval:
+ 627.7701      Inf
+sample estimates:
+mean of x 
+ 660.4071 
+
+    \end{verbatim}
+
+    
+    \begin{enumerate*}
+\item 'iii)'
+\item 'Probability of no-doping equals:'
+\item '0.02'
+\end{enumerate*}
+
+
+    
+    \begin{enumerate*}
+\item 'iv)'
+\item 'I choose testosteron at the level:'
+\item '1378.12'
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} Problema 2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} data \PY{o}{\PYZlt{}\PYZhy{}}read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Altura.csv\PYZdq{}}\PY{p}{)}
+         avg \PY{o}{=} \PY{l+m}{183.8}
+         
+         hist\PY{p}{(}data\PY{o}{\PYZdl{}}Altura\PY{p}{,}
+              las \PY{o}{=} \PY{l+m}{1}\PY{p}{,}
+              xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Height\PYZdq{}}\PY{p}{,}
+              main \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Heigth distribution\PYZdq{}}\PY{p}{)}
+         abline\PY{p}{(}v \PY{o}{=} avg\PY{p}{,} col \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,} lwd \PY{o}{=} \PY{l+m}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} these data looks like it is dutch because it rounds with 183.8 mean in the center}
+         
+         \PY{c+c1}{\PYZsh{} H0 : These adults are not from the Netherlands}
+         \PY{c+c1}{\PYZsh{} H1 : These adults are from the Netherlands}
+         
+         t.test\PY{p}{(}data\PY{o}{\PYZdl{}}Altura\PY{p}{,} mu \PY{o}{=} avg\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} p\PYZhy{}value is equal to \PYZti{}0.09. Being strict with standard alpha level of .05, we cannot reject H0.}
+         \PY{c+c1}{\PYZsh{} However, if we had taken alpha as .1, we would have rejected H0.}
+         \PY{c+c1}{\PYZsh{} In conclusion, more data are needed to conclusively confirm or reject H0}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+	One Sample t-test
+
+data:  data$Altura
+t = -1.745, df = 49, p-value = 0.08726
+alternative hypothesis: true mean is not equal to 183.8
+95 percent confidence interval:
+ 177.8397 184.2201
+sample estimates:
+mean of x 
+ 181.0299 
+
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
