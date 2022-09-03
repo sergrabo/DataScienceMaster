@@ -1,0 +1,22 @@
+--- Ejercicio 11 --- 
+
+--- Parte 1 ---
+-- a,b
+select * from fechaDim;
+select * from productoDim;
+select * from usuarioDim;
+select * from vendedorDim;
+select * from ventasHechos;
+
+-- c
+select vh.* 
+from ventasHechos vh join fechaDim fd on vh.idfecha = fd.idfecha
+where fd.anio = '2017'; -- Es posible que al pedir los datos tuviésemos que sacar las demás columnas de las demás tablas, sería incluir en
+                        -- el select y hacer varios join, sin más
+                        
+select vh.*, fd.mes
+from ventasHechos vh join fechaDim fd on vh.idfecha = fd.idfecha
+where fd.mes <= '6';   -- Algo está mal, de todas maneras creo que después del Join había que hacer un GROUP BY
+                   
+
+

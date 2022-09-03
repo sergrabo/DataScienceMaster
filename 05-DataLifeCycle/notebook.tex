@@ -1,0 +1,2179 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{01-metadataIntro}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{gestiuxf3n-y-uso-de-metadatos}{%
+\section{Gestión y uso de
+Metadatos}\label{gestiuxf3n-y-uso-de-metadatos}}
+
+    \hypertarget{libreruxedas-necesarias}{%
+\subsection{Librerías Necesarias}\label{libreruxedas-necesarias}}
+
+    xml.etree.ElementTree
+
+requests
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{xml}\PY{n+nn}{.}\PY{n+nn}{etree}\PY{n+nn}{.}\PY{n+nn}{ElementTree} \PY{k}{as} \PY{n+nn}{ET}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+\end{Verbatim}
+
+
+    \hypertarget{metadata-attachment}{%
+\subsection{Metadata attachment}\label{metadata-attachment}}
+
+    En este Notebook descubriremos cómo pueden explotarse metadatos
+publicados en formatos basados en etiquetas, como XML.
+
+    
+
+    Vamos a empezar por describir un par de objetos, empezando por un
+cuadro, ``El grito'', de Edvard Munch.
+
+\begin{itemize}
+\tightlist
+\item
+  Title: El grito
+\item
+  Creator: Edvard Munch
+\item
+  Subject: ~Cuadro
+\item
+  Description: Cuadro al óleo de un hombre gritando
+\item
+  Publisher: Galeria nacional de Noruega
+\item
+  Contributor: -
+\item
+  Date: Agosto 2006
+\item
+  Type: óleo
+\item
+  Format: Lienzo, medidas
+\item
+  Identifier: GNN-12312
+\item
+  Source: -
+\item
+  Language: -
+\item
+  Relation: -
+\item
+  Coverage: -
+\item
+  Rights: Entrada a la galería
+\end{itemize}
+
+    Con Dublin Core también podemos describir datasets científicos. Vamos a
+probar con:
+
+https://zenodo.org/record/3372754\#.XcFkhE9Kg5k
+
+\textbf{Consejo}
+
+En el propio repositorio puedes encontrar metadatos
+
+\begin{itemize}
+\tightlist
+\item
+  Title:
+\item
+  Creator:
+\item
+  Subject: ~
+\item
+  Description:
+\item
+  Publisher:
+\item
+  Contributor:
+\item
+  Date:
+\item
+  Type:
+\item
+  Format:
+\item
+  Identifier:
+\item
+  Source:
+\item
+  Language:
+\item
+  Relation:
+\item
+  Coverage: ~
+\item
+  Rights:
+\end{itemize}
+
+    A partir de las descripciones, podemos crear documentos XML que sean
+interpretables por máquinas (entendiendo máquinas como scripts,
+software, etc).
+
+El grito:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<dc:contributor></dc:contributor>}
+\KeywordTok{<dc:coverage></dc:coverage>}
+\KeywordTok{<dc:creator></dc:creator>}
+\KeywordTok{<dc:date>}\NormalTok{Agosto 2006}\KeywordTok{</dc:date>}
+\KeywordTok{<dc:description></dc:description>}
+\KeywordTok{<dc:format>}\NormalTok{Lienzo}\KeywordTok{</dc:format>}
+\KeywordTok{<dc:identifier></dc:identifier>}
+\KeywordTok{<dc:language></dc:language>}
+\KeywordTok{<dc:publisher>}\NormalTok{Galeria Nacional de Noruega}\KeywordTok{</dc:publisher>}
+\KeywordTok{<dc:relation></dc:relation>}
+\KeywordTok{<dc:rights></dc:rights>}
+\KeywordTok{<dc:source></dc:source>}
+\KeywordTok{<dc:subject></dc:subject>}
+\KeywordTok{<dc:title>}\NormalTok{El grito}\KeywordTok{</dc:title>}
+\KeywordTok{<dc:type>}\NormalTok{Óleo}\KeywordTok{</dc:type>}
+\end{Highlighting}
+\end{Shaded}
+
+Dataset:
+\texttt{XML\ \ \textless{}dc:contributor\textgreater{}\ \textless{}/dc:contributor\textgreater{}\ \ \ \textless{}dc:coverage\textgreater{}\ \textless{}/dc:coverage\textgreater{}\ \ \ \textless{}dc:creator\textgreater{}\textless{}/dc:creator\textgreater{}\ \ \ \textless{}dc:date\textgreater{}\textless{}/dc:date\textgreater{}\ \ \ \textless{}dc:subject\textgreater{}\textless{}/dc:subject\textgreater{}\ \ \ \textless{}dc:description\textgreater{}\textless{}/dc:description\textgreater{}\ \ \ \textless{}dc:format\textgreater{}\ \ \textless{}/dc:format\textgreater{}\ \ \ \textless{}dc:identifier\textgreater{}\textless{}/dc:identifier\textgreater{}\ \ \ \textless{}dc:language\textgreater{}\ \textless{}/dc:language\textgreater{}\ \ \ \textless{}dc:publisher\textgreater{}\textless{}/dc:publisher\textgreater{}\ \ \ \textless{}dc:relation\textgreater{}\ \textless{}/dc:relation\textgreater{}\ \ \ \textless{}dc:rights\textgreater{}\ \textless{}/dc:rights\textgreater{}\ \ \ \textless{}dc:source\textgreater{}\ \textless{}/dc:source\textgreater{}\ \ \ \textless{}dc:title\textgreater{}\textless{}/dc:title\textgreater{}\ \ \ \textless{}dc:type\textgreater{}\textless{}/dc:type\textgreater{}}
+
+    Ahora vamos a ver cómo podemos manejar estos datos en Python. Para ello,
+utilizaremos la librería xml.
+
+Para crear un documento XML bien formado, es necesario definir dónde
+está descrito el prefijo Dublin Core o ``dc:''. Para ello, añadimos
+antes de los datos la siguiente cabecera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="UTF-8" standalone="no"}\KeywordTok{?><?xml-stylesheet}\NormalTok{ type="text/xsl" href="/webservices/catalog/xsl/searchRetrieveResponse.xsl"}\KeywordTok{?>}
+\KeywordTok{<searchRetrieveResponse}\OtherTok{ xmlns:oclcterms=}\StringTok{"http://purl.org/oclc/terms/"}\OtherTok{ xmlns:dc=}\StringTok{"http://purl.org/dc/elements/1.1/"}\OtherTok{ xmlns:diag=}\StringTok{"http://www.loc.gov/zing/srw/diagnostic/"}\OtherTok{ xmlns:xsi=}\StringTok{"http://www.w3.org/2001/XMLSchema-instance"}\KeywordTok{>}
+\end{Highlighting}
+\end{Shaded}
+
+Sin olvidar añadir al final:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ErrorTok{<}\NormalTok{/searchRetrieveResponse>}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{xml}\PY{n+nn}{.}\PY{n+nn}{etree}\PY{n+nn}{.}\PY{n+nn}{ElementTree} \PY{k}{as} \PY{n+nn}{ET}
+        \PY{n}{dc\PYZus{}xml} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZlt{}?xml version=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{1.0}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ encoding=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{UTF\PYZhy{}8}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ standalone=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{no}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{?\PYZgt{}\PYZlt{}?xml\PYZhy{}stylesheet type=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{text/xsl}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ href=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{/webservices/catalog/xsl/searchRetrieveResponse.xsl}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{?\PYZgt{}}
+        \PY{l+s+s1}{\PYZlt{}searchRetrieveResponse xmlns:oclcterms=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://purl.org/oclc/terms/}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ xmlns:dc=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ xmlns:diag=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://www.loc.gov/zing/srw/diagnostic/}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ xmlns:xsi=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://www.w3.org/2001/XMLSchema\PYZhy{}instance}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZgt{}}
+        
+        
+        \PY{l+s+s1}{     \PYZlt{}dc:contributor\PYZgt{}Edvard Munch \PYZlt{}/dc:contributor\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:coverage\PYZgt{}Lugar indeterminado\PYZlt{}/dc:coverage\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:creator\PYZgt{}Edvard Munch \PYZlt{}/dc:creator\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:date\PYZgt{}1910\PYZlt{}/dc:date\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:description\PYZgt{}Cuadro...\PYZlt{}/dc:description\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:format\PYZgt{}Oleo sobre carton\PYZlt{}/dc:format\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:identifier\PYZgt{}id\PYZus{}museo\PYZus{}grito\PYZlt{}/dc:identifier\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:language\PYZgt{}\PYZlt{}/dc:language\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:publisher\PYZgt{}Galeria nacional de Oslo\PYZlt{}/dc:publisher\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:relation\PYZgt{}cuadro1, cuadro2, cuadro3\PYZlt{}/dc:relation\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:rights\PYZgt{}Acceso al museo\PYZlt{}/dc:rights\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:source\PYZgt{}\PYZlt{}/dc:source\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:title\PYZgt{}El gripo\PYZlt{}/dc:title\PYZgt{}}
+        \PY{l+s+s1}{  \PYZlt{}dc:type\PYZgt{}Cuadro\PYZlt{}/dc:type\PYZgt{}}
+        
+        
+        
+        \PY{l+s+s1}{\PYZlt{}/searchRetrieveResponse\PYZgt{}}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{tree} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{fromstring}\PY{p}{(}\PY{n}{dc\PYZus{}xml}\PY{p}{)}
+        \PY{n}{tree}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} <Element 'searchRetrieveResponse' at 0x7ff932dbae58>
+\end{Verbatim}
+            
+    Si queremos recorrer los elementos del XML que hemos formado, podemos
+utilizar un bucle, teniendo en cuenta que la información que nos
+interesa la tenemos en `searchRetrieveResponse':
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{tree}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{searchRetrieveResponse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}Se genera un iterador partir de la raíz del árbol}
+            \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://purl.org/dc/elements/1.1/\}contributor Edvard Munch 
+\{http://purl.org/dc/elements/1.1/\}coverage Lugar indeterminado
+\{http://purl.org/dc/elements/1.1/\}creator Edvard Munch 
+\{http://purl.org/dc/elements/1.1/\}date 1910
+\{http://purl.org/dc/elements/1.1/\}description Cuadro{\ldots}
+\{http://purl.org/dc/elements/1.1/\}format Oleo sobre carton
+\{http://purl.org/dc/elements/1.1/\}identifier id\_museo\_grito
+\{http://purl.org/dc/elements/1.1/\}language None
+\{http://purl.org/dc/elements/1.1/\}publisher Galeria nacional de Oslo
+\{http://purl.org/dc/elements/1.1/\}relation cuadro1, cuadro2, cuadro3
+\{http://purl.org/dc/elements/1.1/\}rights Acceso al museo
+\{http://purl.org/dc/elements/1.1/\}source None
+\{http://purl.org/dc/elements/1.1/\}title El gripo
+\{http://purl.org/dc/elements/1.1/\}type Cuadro
+
+    \end{Verbatim}
+
+    Observa que, al utilizar el prefijo `dc:' e indicarle que está descrito
+en la URL `http://purl.org/dc/elements/1.1/', la eqtiqueta o ``tag''
+aparece como, por ejemplo \{URL\}contributor.
+
+Prueba a mostrar los metadatos que has creado a partir del cuadro y del
+dataset:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{tree}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{searchRetrieveResponse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Edvard Munch 
+Lugar indeterminado
+Edvard Munch 
+1910
+Cuadro{\ldots}
+Oleo sobre carton
+id\_museo\_grito
+None
+Galeria nacional de Oslo
+cuadro1, cuadro2, cuadro3
+Acceso al museo
+None
+El gripo
+Cuadro
+
+    \end{Verbatim}
+
+    Utilizando findall() sobre el arbol (tree), podemos encontrar todos los
+elementos con una etiqueta determinada.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{relation} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/\PYZcb{}relation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{relation}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[<Element '\{http://purl.org/dc/elements/1.1/\}relation' at 0x7f923c9d55e8>]
+
+    \end{Verbatim}
+
+    Ten en cuenta que lo que encontramos es, en realidad, una parte del
+documento XML, por lo que hay que iterarlo como antes:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{relation}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://purl.org/dc/elements/1.1/\}relation cuadro1, cuadro2, cuadro3
+
+    \end{Verbatim}
+
+    XML utiliza prefijos para no necesitar referenciar a la URL de un tipo
+cada vez, lo podemos ver en la cabecera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="UTF-8" standalone="no"}\KeywordTok{?><?xml-stylesheet}\NormalTok{ type="text/xsl" href="/webservices/catalog/xsl/searchRetrieveResponse.xsl"}\KeywordTok{?>}
+\KeywordTok{<searchRetrieveResponse}\OtherTok{ xmlns:oclcterms=}\StringTok{"http://purl.org/oclc/terms/"}\OtherTok{ xmlns:dc=}\StringTok{"http://purl.org/dc/elements/1.1/"}\OtherTok{ xmlns:diag=}\StringTok{"http://www.loc.gov/zing/srw/diagnostic/"}\OtherTok{ xmlns:xsi=}\StringTok{"http://www.w3.org/2001/XMLSchema-instance"}\KeywordTok{>}\NormalTok{'''}
+\end{Highlighting}
+\end{Shaded}
+
+Por ejemplo, cada vez que queremos utilizar un tipo de Dublin Core,
+utilizamos el prefijo dc: que equivale a llamar a la definición:
+
+xmlns:dc=``http://purl.org/dc/elements/1.1/''
+
+Sin embargo, para utilizar ElementTree en Python, tenemos que utilizar
+la URL completa. Esto puede resultar un poco engorroso, así que podemos
+definir el namespace para utilizar también el prefijo:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{namespaces} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} add more as needed}
+         
+         \PY{n}{tree}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc:rights}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}\PY{o}{.}\PY{n}{text}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 'Acceso al museo'
+\end{Verbatim}
+            
+    Los documentos XML, aparte de las etiquetas y los valores, pueden
+contener atributos. Dado el siguiente ejemplo, vamos a ver cómo obtener
+la lista y los valores de los atributos
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{dc\PYZus{}xml} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{\PYZlt{}?xml version=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{1.0}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ encoding=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{UTF\PYZhy{}8}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ standalone=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{no}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{?\PYZgt{}\PYZlt{}?xml\PYZhy{}stylesheet type=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{text/xsl}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ href=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{/webservices/catalog/xsl/searchRetrieveResponse.xsl}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{?\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}searchRetrieveResponse xmlns:oclcterms=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://purl.org/oclc/terms/}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ xmlns:dc=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ xmlns:diag=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://www.loc.gov/zing/srw/diagnostic/}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ xmlns:xsi=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{http://www.w3.org/2001/XMLSchema\PYZhy{}instance}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:contributor\PYZgt{}asdsadsad\PYZlt{}/dc:contributor\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:coverage\PYZgt{}dfsd\PYZlt{}/dc:coverage\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:creator\PYZgt{}sadsa\PYZlt{}/dc:creator\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:date\PYZgt{}sadas\PYZlt{}/dc:date\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:description atributo1=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{valor1}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ atributo2=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{valor2}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ lang=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ES}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZgt{}sadsa\PYZlt{}/dc:description\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:format\PYZgt{}sadasd\PYZlt{}/dc:format\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:identifier\PYZgt{}sadsad\PYZlt{}/dc:identifier\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:language\PYZgt{}asdasd\PYZlt{}/dc:language\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:publisher\PYZgt{}wqewq\PYZlt{}/dc:publisher\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:relation \PYZgt{}wqeqw\PYZlt{}/dc:relation\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:rights\PYZgt{}ffefe\PYZlt{}/dc:rights\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:source\PYZgt{}vfvf\PYZlt{}/dc:source\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:title\PYZgt{}wqewqe\PYZlt{}/dc:title\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}dc:type\PYZgt{}ewfrb\PYZlt{}/dc:type\PYZgt{}}
+         \PY{l+s+s1}{\PYZlt{}/searchRetrieveResponse\PYZgt{}}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{tree2} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{fromstring}\PY{p}{(}\PY{n}{dc\PYZus{}xml}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{tree2}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc:description}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}\PY{o}{.}\PY{n}{attrib}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} \{'atributo1': 'valor1', 'atributo2': 'valor2', 'lang': 'ES'\}
+\end{Verbatim}
+            
+    Conociendo los nombres de estos atributos, puedes extraer su valor. Esto
+serviría para dar una información adicional al contenido de la etiqueta.
+Por ejemplo, se podría añadir el idioma como atributo en la descripción.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{tree2}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc:description}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}\PY{o}{.}\PY{n}{attrib}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{atributo1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tree2}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc:description}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}\PY{o}{.}\PY{n}{attrib}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{atributo2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+valor1
+valor2
+
+    \end{Verbatim}
+
+    Vamos a analizar un documento XML más complejo, empezando por
+descargarlo:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{k+kn}{import} \PY{n+nn}{requests}
+         
+         \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://gist.githubusercontent.com/vivien/580729/raw/651d1b216357c0d7d9fc47075071fb482e11fb36/dublincore\PYZhy{}example.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{response}\PY{o}{.}\PY{n}{status\PYZus{}code} \PY{o}{==} \PY{l+m+mi}{200}\PY{p}{:}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./dublincore\PYZhy{}example.xml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                 \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{content}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Recuerda!}
+
+Jupyter permite ejecutar ciertos comandos bash
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{ls}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+dublincore-example.xml  metadataIntro.ipynb
+
+    \end{Verbatim}
+
+    Y lo cargamos en python:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{tree} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dublincore\PYZhy{}example.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{namespaces} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} add more as needed}
+         \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{tree}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://www.loc.gov/zing/srw/\PYZcb{}searchRetrieveResponse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://www.loc.gov/zing/srw/\}version 1.1
+\{http://www.loc.gov/zing/srw/\}numberOfRecords 33587
+\{http://www.loc.gov/zing/srw/\}records 
+
+\{http://www.loc.gov/zing/srw/\}nextRecordPosition 11
+\{http://www.loc.gov/zing/srw/\}resultSetIdleTime None
+\{http://www.loc.gov/zing/srw/\}echoedSearchRetrieveRequest 
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{all\PYZus{}records} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://www.loc.gov/zing/srw/\PYZcb{}records}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{all\PYZus{}records}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[<Element '\{http://www.loc.gov/zing/srw/\}records' at 0x7f923c09c228>]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{tree}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://www.loc.gov/zing/srw/\PYZcb{}record}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+\{http://www.loc.gov/zing/srw/\}recordSchema info:srw/schema/1/dc
+\{http://www.loc.gov/zing/srw/\}recordPacking xml
+\{http://www.loc.gov/zing/srw/\}recordData 
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{tree}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://www.loc.gov/zing/srw/\PYZcb{}recordData}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+\{http://www.loc.gov/zing/srw/\}oclcdcs 
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{tree}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://www.loc.gov/zing/srw/\PYZcb{}oclcdcs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://purl.org/dc/elements/1.1/\}creator Snelling, Lauraine.
+\{http://purl.org/dc/elements/1.1/\}date c2003
+\{http://purl.org/dc/elements/1.1/\}description "Ruby Torvald sets out on a daunting journey with her young sister, Opal, to hopefully see their long-lost father once more and claim the promised inheritance. But instead of the treasure they expected, the sisters discover something most shocking." -- Book Cover.
+\{http://purl.org/dc/elements/1.1/\}format 320 p. ; 22 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0764290762
+\{http://purl.org/dc/elements/1.1/\}identifier 9780764290763
+\{http://purl.org/dc/elements/1.1/\}identifier 0764222228
+\{http://purl.org/dc/elements/1.1/\}identifier 9780764222221
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Bethany House Publishers
+\{http://purl.org/dc/elements/1.1/\}relation Dakotah treasures ; 1
+\{http://purl.org/dc/elements/1.1/\}subject Inheritance and succession--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Fathers and daughters--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Women pioneers--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Sisters--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Medora (N.D.)--Fiction.
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}type Christian fiction.
+\{http://purl.org/dc/elements/1.1/\}type Western stories.
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 030206
+\{http://purl.org/oclc/terms/\}recordIdentifier   2003002571
+\{http://purl.org/oclc/terms/\}recordIdentifier 51647374
+\{http://purl.org/dc/elements/1.1/\}creator Creech, Sharon.
+\{http://purl.org/dc/elements/1.1/\}date c2002
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description Thirteen-year-old fraternal twins Dallas and Florida have grown up in a terrible orphanage but their lives change forever when an eccentric but sweet older couple invites them each on an adventure, beginning in an almost magical place called Ruby Holler.
+\{http://purl.org/dc/elements/1.1/\}description The Silver Bird -- The Boxton Creek Home -- Ruby Holler -- Mush -- Thinking Corners -- The Opportunity -- Doubts -- Hansel and Gretel -- The God -- The Egg -- The Grump -- Work -- Gravy -- Wood -- Conversations in the Night -- The Axe -- The Rocker -- The Trepids -- Understone Funds -- Through the Holler -- Lost and Found -- A Trip to Boxton -- Ready -- Tiller and Sairy -- The Holler at Night -- Shack Talk -- Trials -- Mrs. Trepid -- Decisions -- Nightmares -- Medicine -- Paddling and Hiking -- Z's Report -- Bearings -- Stiff -- A Long Chain -- Word Pictures -- Surveying -- The Worrywarts -- Babies in the Box -- Shopping -- Dorkhead -- Loops -- Progress -- The Rock -- Stones in the Holler -- Running -- More Shopping -- Underwater -- The Feeling -- Z -- The One-Log Raft -- The Dunces -- Slow Motion -- On the Road -- On the River -- The Soggy Heart -- Preparations -- Investments -- Hospital Talk -- Mr. Trepid's Adventure -- Jewels -- Mission-Accomplished Cake -- Appraisals -- Conversations in the Night -- Dreams.
+\{http://purl.org/dc/elements/1.1/\}format 310 p. ; 22 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0060277327
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060277321
+\{http://purl.org/dc/elements/1.1/\}identifier 0060277335 (lib. bdg)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060277338 (lib. bdg)
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Joanna Cotler Books/Harper Collins Publishers
+\{http://purl.org/dc/elements/1.1/\}relation http://www.loc.gov/catdir/description/hc041/00066371.html
+\{http://purl.org/dc/elements/1.1/\}subject Orphans--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Twins--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Brothers and sisters--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Wood-carvers--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Country life--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Voyages and travels--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}title Ruby Holler 
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 001109
+\{http://purl.org/oclc/terms/\}recordIdentifier    00066371 
+\{http://purl.org/oclc/terms/\}recordIdentifier 45487314
+\{http://purl.org/dc/elements/1.1/\}creator Bridges, Ruby.
+\{http://purl.org/dc/elements/1.1/\}date 1999
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description Ruby Bridges recounts the story of her involvement, as a six-year-old, in the integration of her school in New Orleans in 1960.
+\{http://purl.org/dc/elements/1.1/\}description green dot
+\{http://purl.org/dc/elements/1.1/\}format 63 p. : ill. ; 28 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0590189239 (hc)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780590189231 (hc)
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Scholastic Press
+\{http://purl.org/dc/elements/1.1/\}subject Bridges, Ruby--Juvenile literature.
+\{http://purl.org/dc/elements/1.1/\}subject African American children--Louisiana--New Orleans--Biography--Juvenile literature.
+\{http://purl.org/dc/elements/1.1/\}subject African Americans--Louisiana--New Orleans--Biography--Juvenile literature.
+\{http://purl.org/dc/elements/1.1/\}subject School integration--Louisiana--New Orleans--Juvenile literature.
+\{http://purl.org/dc/elements/1.1/\}subject New Orleans (La.)--Race relations--Juvenile literature.
+\{http://purl.org/dc/elements/1.1/\}title Through my eyes 
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 981216
+\{http://purl.org/oclc/terms/\}recordIdentifier    98049242 
+\{http://purl.org/oclc/terms/\}recordIdentifier 40588556
+\{http://purl.org/dc/elements/1.1/\}creator Andrews, V. C. (Virginia C.)
+\{http://purl.org/dc/elements/1.1/\}date c1994
+\{http://purl.org/dc/elements/1.1/\}description growing up in the heart of Cajun country, the only family Ruby Landry has ever known are her loving ghuardian Jack, a drunken outcast who lives alone in a shack in the swamp.
+\{http://purl.org/dc/elements/1.1/\}format 442 p. ; 23 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0671759353
+\{http://purl.org/dc/elements/1.1/\}identifier 9780671759353
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Pocket Books
+\{http://purl.org/dc/elements/1.1/\}subject Aileler--Roman.
+\{http://purl.org/dc/elements/1.1/\}subject Luizana--Roman.
+\{http://purl.org/dc/elements/1.1/\}subject Families--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Louisiana--Fiction.
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}type Romantic suspense novels.
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 940608
+\{http://purl.org/oclc/terms/\}recordIdentifier    94168748 
+\{http://purl.org/oclc/terms/\}recordIdentifier 29631416
+\{http://purl.org/dc/elements/1.1/\}creator Emberley, Michael.
+\{http://purl.org/dc/elements/1.1/\}date c1990
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description While taking cheese pies to her Granny, Ruby, a small but tough-minded little mouse, forgets her mother's advice not to talk to cats. Story is a variation on Red Riding Hood.
+\{http://purl.org/dc/elements/1.1/\}format [25] p. : col. ill. ; 21 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0316236438 (lib. bdg.) 
+\{http://purl.org/dc/elements/1.1/\}identifier 9780316236430 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0316236608 (pbk.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780316236607 (pbk.)
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Little, Brown
+\{http://purl.org/dc/elements/1.1/\}subject Mice--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Cats--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 890511
+\{http://purl.org/oclc/terms/\}recordIdentifier    89012108 
+\{http://purl.org/oclc/terms/\}recordIdentifier 19774282
+\{http://purl.org/dc/elements/1.1/\}creator Ruby, Laura.
+\{http://purl.org/dc/elements/1.1/\}date 2007
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description Loopy -- Restoration -- Ballad of the Barbie feet -- Dear psycho -- Safekeeping -- Picture of health -- I'm not Julia Roberts -- The bunko bunny -- The dog next door -- Hug machine.
+\{http://purl.org/dc/elements/1.1/\}format 251 p. : ill. ; 22 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0446578746
+\{http://purl.org/dc/elements/1.1/\}identifier 9780446578745
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Warner Books
+\{http://purl.org/dc/elements/1.1/\}relation http://www.loc.gov/catdir/toc/ecip069/2006006832.html
+\{http://purl.org/dc/elements/1.1/\}subject Stepmothers--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Stepfamilies--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Illinois--Fiction.
+\{http://purl.org/dc/elements/1.1/\}title I'm not Julia Roberts 
+\{http://purl.org/dc/elements/1.1/\}title I am not Julia Roberts
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 060227
+\{http://purl.org/oclc/terms/\}recordIdentifier   2006006832
+\{http://purl.org/oclc/terms/\}recordIdentifier 64442891
+\{http://purl.org/dc/elements/1.1/\}creator Ruby, Laura.
+\{http://purl.org/dc/elements/1.1/\}date c2007
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description Thirteen-year-old Georgie and Bug, a year older, have been pulled apart by the demands of their newfound fame and fortune, but join forces again when a punk, vampires, a giant sloth, and other creatures come after them on the streets of a New York City of the future.
+\{http://purl.org/dc/elements/1.1/\}format 325 p. ; 22 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752583 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752590 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752580
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752599
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Eos
+\{http://purl.org/dc/elements/1.1/\}relation http://www.loc.gov/catdir/enhancements/fy0911/2007008621-b.html
+\{http://purl.org/dc/elements/1.1/\}relation http://www.loc.gov/catdir/enhancements/fy0911/2007008621-d.html
+\{http://purl.org/dc/elements/1.1/\}subject Fame--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Wealth--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Supernatural--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Books and reading--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Cats--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Flight--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject New York (N.Y.)--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}title The chaos king 
+\{http://purl.org/dc/elements/1.1/\}type Fantasy fiction.
+\{http://purl.org/dc/elements/1.1/\}type Children's stories.
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 070329
+\{http://purl.org/oclc/terms/\}recordIdentifier   2007008621
+\{http://purl.org/oclc/terms/\}recordIdentifier 122309000
+\{http://purl.org/dc/elements/1.1/\}creator Ruby, Laura.
+\{http://purl.org/dc/elements/1.1/\}date c2009
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description Tola Riley, a high school junior, struggles to tell the truth when she and her art teacher are accused of having an affair.
+\{http://purl.org/dc/elements/1.1/\}format 247 p. ; 22 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 9780061243301 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0061243302 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780061243325 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0061243329 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher HarperTeen
+\{http://purl.org/dc/elements/1.1/\}subject Teacher-student relationships--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Cyberbullying--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject High schools--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Schools--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Family problems--Fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Divorce--Fiction.
+\{http://purl.org/dc/elements/1.1/\}title Bad apple 
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 090128
+\{http://purl.org/oclc/terms/\}recordIdentifier   2009001409
+\{http://purl.org/oclc/terms/\}recordIdentifier 300462588
+\{http://purl.org/dc/elements/1.1/\}creator Ruby, Laura.
+\{http://purl.org/dc/elements/1.1/\}date c2006
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description In a future New York where most people can fly and cats are a rarity, a nondescript resident of Hope House for the Homeless and Hopeless discovers that although she is shunned as a "leadfoot," she has the surprising ability to become invisible.
+\{http://purl.org/dc/elements/1.1/\}format 327 p. ; 22 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752556
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752564 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752552
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752569
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher Eos
+\{http://purl.org/dc/elements/1.1/\}relation http://www.loc.gov/catdir/toc/ecip0518/2005023170.html
+\{http://purl.org/dc/elements/1.1/\}relation http://www.loc.gov/catdir/enhancements/fy0910/2005023170-b.html
+\{http://purl.org/dc/elements/1.1/\}relation http://www.loc.gov/catdir/enhancements/fy0910/2005023170-d.html
+\{http://purl.org/dc/elements/1.1/\}subject Orphans--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Orphanages--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Cats--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Flight--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Gangsters--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject New York (N.Y.)--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}title The Wall and the Wing 
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 050816
+\{http://purl.org/oclc/terms/\}recordIdentifier   2005023170
+\{http://purl.org/oclc/terms/\}recordIdentifier 61451492
+\{http://purl.org/dc/elements/1.1/\}creator Ruby, Laura.
+\{http://purl.org/dc/elements/1.1/\}date c2006
+\{http://purl.org/dc/elements/1.1/\}description 1st ed.
+\{http://purl.org/dc/elements/1.1/\}description Sixteen-year-old high school senior Audrey is humiliated when a compromising photograph of her is sent around her school, but she discovers a toughness within her that she never knew she had.
+\{http://purl.org/dc/elements/1.1/\}format 274 p. ; 22 cm.
+\{http://purl.org/dc/elements/1.1/\}identifier 0060882239 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060882235 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060882247 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060882242 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}language eng
+\{http://purl.org/dc/elements/1.1/\}publisher HarperTempest
+\{http://purl.org/dc/elements/1.1/\}subject Interpersonal relations--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Sex--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Conduct of life--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject High schools--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}subject Schools--Juvenile fiction.
+\{http://purl.org/dc/elements/1.1/\}title Good girls 
+\{http://purl.org/dc/elements/1.1/\}type Text
+\{http://purl.org/oclc/terms/\}recordCreationDate 060125
+\{http://purl.org/oclc/terms/\}recordIdentifier   2006000340
+\{http://purl.org/oclc/terms/\}recordIdentifier 63187390
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{table} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/\PYZcb{}identifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://purl.org/dc/elements/1.1/\}identifier 0764290762
+\{http://purl.org/dc/elements/1.1/\}identifier 9780764290763
+\{http://purl.org/dc/elements/1.1/\}identifier 0764222228
+\{http://purl.org/dc/elements/1.1/\}identifier 9780764222221
+\{http://purl.org/dc/elements/1.1/\}identifier 0060277327
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060277321
+\{http://purl.org/dc/elements/1.1/\}identifier 0060277335 (lib. bdg)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060277338 (lib. bdg)
+\{http://purl.org/dc/elements/1.1/\}identifier 0590189239 (hc)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780590189231 (hc)
+\{http://purl.org/dc/elements/1.1/\}identifier 0671759353
+\{http://purl.org/dc/elements/1.1/\}identifier 9780671759353
+\{http://purl.org/dc/elements/1.1/\}identifier 0316236438 (lib. bdg.) 
+\{http://purl.org/dc/elements/1.1/\}identifier 9780316236430 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0316236608 (pbk.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780316236607 (pbk.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0446578746
+\{http://purl.org/dc/elements/1.1/\}identifier 9780446578745
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752583 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752590 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752580
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752599
+\{http://purl.org/dc/elements/1.1/\}identifier 9780061243301 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0061243302 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780061243325 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0061243329 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752556
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752564 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752552
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752569
+\{http://purl.org/dc/elements/1.1/\}identifier 0060882239 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060882235 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060882247 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060882242 (lib. bdg.)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{relation} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/\PYZcb{}identifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{relation}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{elem}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{elem}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://purl.org/dc/elements/1.1/\}identifier 0764290762
+\{http://purl.org/dc/elements/1.1/\}identifier 9780764290763
+\{http://purl.org/dc/elements/1.1/\}identifier 0764222228
+\{http://purl.org/dc/elements/1.1/\}identifier 9780764222221
+\{http://purl.org/dc/elements/1.1/\}identifier 0060277327
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060277321
+\{http://purl.org/dc/elements/1.1/\}identifier 0060277335 (lib. bdg)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060277338 (lib. bdg)
+\{http://purl.org/dc/elements/1.1/\}identifier 0590189239 (hc)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780590189231 (hc)
+\{http://purl.org/dc/elements/1.1/\}identifier 0671759353
+\{http://purl.org/dc/elements/1.1/\}identifier 9780671759353
+\{http://purl.org/dc/elements/1.1/\}identifier 0316236438 (lib. bdg.) 
+\{http://purl.org/dc/elements/1.1/\}identifier 9780316236430 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0316236608 (pbk.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780316236607 (pbk.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0446578746
+\{http://purl.org/dc/elements/1.1/\}identifier 9780446578745
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752583 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752590 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752580
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752599
+\{http://purl.org/dc/elements/1.1/\}identifier 9780061243301 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0061243302 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780061243325 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0061243329 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752556
+\{http://purl.org/dc/elements/1.1/\}identifier 0060752564 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752552
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060752569
+\{http://purl.org/dc/elements/1.1/\}identifier 0060882239 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060882235 (trade bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 0060882247 (lib. bdg.)
+\{http://purl.org/dc/elements/1.1/\}identifier 9780060882242 (lib. bdg.)
+
+    \end{Verbatim}
+
+    \hypertarget{xpath}{%
+\subsection{XPATH}\label{xpath}}
+
+    XPath es un lenguaje que permite construir expresiones que recorren y
+procesan un documento XML. La idea es parecida a las expresiones
+regulares para seleccionar partes de un texto sin atributos. XPath
+permite buscar y seleccionar teniendo en cuenta la estructura jerárquica
+del XML
+
+    Syntax
+
+Meaning
+
+{tag}
+
+Selects all child elements with the given tag. For example, {spam}
+selects all child elements named {spam}, and {spam/egg} selects all
+grandchildren named {egg} in all children named {spam}.
+
+*
+
+Selects all child elements. For example, */egg selects all grandchildren
+named {egg}.
+
+{.}
+
+Selects the current node. This is mostly useful at the beginning of the
+path, to indicate that it's a relative path.
+
+{//}
+
+Selects all subelements, on all levels beneath the current element. For
+example, {.//egg} selects all {egg} elements in the entire tree.
+
+{..}
+
+Selects the parent element.
+
+{{[}@attrib{]}}
+
+Selects all elements that have the given attribute.
+
+{{[}@attrib='value'{]}}
+
+Selects all elements for which the given attribute has the given value.
+The value cannot contain quotes.
+
+{{[}tag{]}}
+
+Selects all elements that have a child named {tag}. Only immediate
+children are supported.
+
+{{[}tag=`text'{]}}
+
+Selects all elements that have a child named {tag} whose complete text
+content, including descendants, equals the given {text}.
+
+{{[}position{]}}
+
+Selects all elements that are located at the given position. The
+position can be either an integer (1 is the first position), the
+expression {last()} (for the last position), or a position relative to
+the last position (e.g. {last()-1}).
+
+    Como ves, hay que ir entendiendo la jerarquía del XML para poder obtener
+la información.
+
+¿Puedes obtener los títulos de los recursos descritos en el XML?
+
+    \textbf{Ayuda}
+
+`//' para indicar que empiece a buscar desde el elemento actual +
+tipo+nombre del elemento a buscar (\{http://purl.org/dc/elements/1.1/\}
+title)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{relation} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/\PYZcb{}title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{relation}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{elem}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{elem}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}title Ruby Holler 
+\{http://purl.org/dc/elements/1.1/\}title Through my eyes 
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}title I'm not Julia Roberts 
+\{http://purl.org/dc/elements/1.1/\}title I am not Julia Roberts
+\{http://purl.org/dc/elements/1.1/\}title The chaos king 
+\{http://purl.org/dc/elements/1.1/\}title Bad apple 
+\{http://purl.org/dc/elements/1.1/\}title The Wall and the Wing 
+\{http://purl.org/dc/elements/1.1/\}title Good girls 
+
+    \end{Verbatim}
+
+    Haz lo mismo utilizando namespace
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{namespaces} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://purl.org/dc/elements/1.1/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} add more as needed}
+         \PY{n}{relation} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+         \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{relation}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{elem}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{elem}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}title Ruby Holler 
+\{http://purl.org/dc/elements/1.1/\}title Through my eyes 
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}title Ruby 
+\{http://purl.org/dc/elements/1.1/\}title I'm not Julia Roberts 
+\{http://purl.org/dc/elements/1.1/\}title I am not Julia Roberts
+\{http://purl.org/dc/elements/1.1/\}title The chaos king 
+\{http://purl.org/dc/elements/1.1/\}title Bad apple 
+\{http://purl.org/dc/elements/1.1/\}title The Wall and the Wing 
+\{http://purl.org/dc/elements/1.1/\}title Good girls 
+
+    \end{Verbatim}
+
+    Ejemplo con EML
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k+kn}{import} \PY{n+nn}{requests}
+         
+         \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://zenodo.org/record/841691/files/amt\PYZus{}prototype.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{response}\PY{o}{.}\PY{n}{status\PYZus{}code} \PY{o}{==} \PY{l+m+mi}{200}\PY{p}{:}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./amt\PYZus{}prototype.xml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                 \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{content}\PY{p}{)}
+                 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{ls}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+amt\_prototype.xml  dublincore-example.xml  metadataIntro.ipynb
+
+    \end{Verbatim}
+
+    En estándares más complejos, el xml de base puede tener una jerarquía
+anidada, como es el caso de EML. Entonces, cada elemento puede tener de
+0 a N ``hijos'', formando nuevos árboles.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{tree} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{amt\PYZus{}prototype.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{root} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{getroot}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{root}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{child}\PY{p}{)}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+alternateIdentifier | 
+10.5281/zenodo.841183
+
+title | water reservoir of Cuerda del Pozo
+organizationName | IFCA
+electronicMailAddress | marco@ifca.unican.es
+salutation | Mr
+givenName | Jesus Marco
+surName | De Lucas
+deliveryPoint | Avda Castros s/n
+city | Santander
+postalCode | 39005
+country | Spain
+organizationName | IFCA
+electronicMailAddress | aguilarf@ifca.unican.es
+role | guardian
+givenName | Fernando
+surName | Aguilar
+deliveryPoint | Avda Castros s/n
+city | Santander
+postalCode | 39005
+country | Spain
+para | The CTD 60 is a precision probe for oceanographic and limnological measurements of physical, chemical and optical parameters up to a depth of 2000 m. It allows the simultaneous measurement of following parameters: Pressure (depth), temperature, conductivity, raw O2, REDOX, dissolved oxygen, pH, Oxigen Saturation, Salinity.
+keyword | measure
+keyword | water reservoir
+keyword | sensor
+keyword | physical and chemical parameters
+geographicDescription | water reservoir
+westBoundingCoordinate | -3.75
+eastBoundingCoordinate | -2.375
+northBoundingCoordinate | 42.0
+southBoundingCoordinate | 40.875
+calendarDate | 2010
+calendarDate | 2010
+organizationName | IFCA
+electronicMailAddress | garciad@ifca.unican.es
+givenName | Daniel
+surName | Garcia
+deliveryPoint | Avda Castros S/N
+city | Santander
+postalCode | 39005
+country | Spain
+instrumentation | CTD60M-Probe. It allows the simultaneous measurement of following parameters: Pressure (depth), temperature, conductivity, raw O2, REDOX, dissolved oxygen, pH, Oxigen Saturation, Salinity.
+title | stationary measures
+para | measures taken at a stationary depth of about 4 meters with a CTD 60. Measurements of physical, chemical and optical parameter.
+entityName | AMT
+entityDescription | Measurement of following parameters: Pressure (depth), temperature, conductivity, raw O2, REDOX, dissolved oxygen, pH, Oxigen Saturation, Salinity.
+objectName | amt.csv
+size | 4275737
+authentication | f38ded28383d9f69af7cb9c98aed798b
+encodingMethod | ASCII text
+characterEncoding | us-ascii
+numHeaderLines | 1
+numFooterLines | 0
+attributeOrientation | column
+recordDelimiter | \textbackslash{}n
+physicalLineDelimiter | \textbackslash{}n
+fieldDelimiter | ;
+quoteCharacter | "
+url | http://doriiie02.ifca.es/datasets/amt.csv
+title | ROEM +
+personnel | Agustin Monteoliva
+abstract | Life + Project{\ldots} eutrophication
+funding | EC
+descriptor | Ecology
+attributeName | date
+attributeLabel | date
+attributeDefinition | date of measure
+storageType | string
+formatString | YYYY-MM-DD , hh:mm
+dateTimePrecision | 1
+minimum | 2010-01-01 , 00:00
+maximum | 2016-12-31 , 23:59
+attributeName | Temperature
+attributeLabel | Temp
+attributeDefinition | Temperature
+storageType | double
+precision | 0.01
+standardUnit | celsius
+numberType | real
+minimum | -2.0
+maximum | 32.0
+para | This parameter is filtered from raw when value is less than -1.0 or higher than 35.0
+references | 1827473819284
+para | Temperature calibration
+description | Calibration step for temperature
+attributeName | Press
+attributeLabel | Press
+attributeDefinition | Press (Depth)
+storageType | double
+precision | 0.1
+customUnit | dbar
+numberType | real
+minimum | 0
+maximum | 50
+para | Parameter is filtered when Press * 1.02 less than 0.0 or Press * 1.02 is higher than  30.0
+references | 1827473819284
+attributeName | Conductivity
+attributeLabel | Cond
+attributeDefinition | Conductivity of an electrolyte solution is a measure of its ability to conduct electricity. The SI unit of conductivity is siemens per meter (S/m).
+storageType | double
+precision | 0.005
+customUnit | mS/cm
+numberType | real
+minimum | 0
+maximum | 6
+para | Parameter is filtered when is less than 0.0001 or higher than 0.3
+references | 1827473819284
+attributeName | Salinity
+attributeLabel | Salinity
+attributeDefinition | Salinity of water cannot be measured directly by one single sensor, it is calculated from the individual sensors for pressure, temperature and conductivity
+storageType | Double
+precision | 0.0001
+customUnit | psu
+numberType | real
+minimum | 0
+maximum | 0.1
+references | 1827473819284
+attributeName | Dissolved oxygen
+attributeLabel | DO
+attributeDefinition | Dissolved oxygen refers to the level of free
+storageType | double
+precision | 0.1
+standardUnit | milligramsPerLiter
+numberType | real
+minimum | 0
+maximum | 20
+para | Parameter is filtered when is less than 0 and higher than 30
+references | 1827473819284
+attributeName | rawO2
+attributeLabel | rawO2
+attributeDefinition | dissolved oxygen
+storageType | double
+precision | 10
+standardUnit | dimensionless
+numberType | real
+minimum | 0
+maximum | 5000
+references | 1827473819284
+attributeName | Oxygen Saturation
+attributeLabel | OxySat
+attributeDefinition | relative measure of the amount of oxygen that is dissolved or carried in a given medium. \%
+storageType | double
+precision | 1
+standardUnit | dimensionless
+numberType | real
+minimum | 0
+maximum | 120
+para | Parameter is filtered when is less than 0  or higher than 200
+references | 1827473819284
+attributeName | ph
+attributeLabel | ph
+attributeDefinition | numeric scale used to specify the acidity or basicity
+storageType | double
+precision | 0.1
+standardUnit | dimensionless
+numberType | real
+minimum | 4
+maximum | 10
+para | Parameter is filtered when is less tha 5 or higher than10
+references | 1827473819284
+attributeName | Redox
+attributeLabel | redox
+attributeDefinition | Redox
+storageType | double
+precision | 10
+standardUnit | dimensionless
+numberType | real
+minimum | 0
+maximum | 5000
+references | 1827473819284
+title | Peaks Detector
+license | GPL
+version | 1.0
+para | Detects and filter peaks from parameters defined in a CSV file 
+references | 1465302104227
+programmingLanguage | Python 2.7.3
+mediumName | doriiie02 Server HDD
+description | decibar, Units derived from the bar.
+description | Conductivity of an electrolyte solution is a measure of its ability to conduct electricity. The SI unit of conductivity is siemens per meter (S/m).
+description | practical salinity unit
+
+    \end{Verbatim}
+
+    Explora un poco: Nombre del proyecto, autores, lista de
+atributos\ldots{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}elementos = tree.findall(\PYZsq{}/dataset[1]/creator/individualName/salutation\PYZsq{})}
+         \PY{n}{elementos} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//attributeList/attribute[@id=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{1465311292527}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{]/attributeName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{elementos}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{o}{.}\PY{n}{tag} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{e}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+attributeName: date
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{elementos} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dataset}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{elementos}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{o}{.}\PY{n}{tag} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{e}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{e}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{tag} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+dataset:  
+
+dataset:  
+
+title: water reservoir of Cuerda del Pozo
+creator:  
+individualName: None
+salutation: Mr
+givenName: Jesus Marco
+surName: De Lucas
+organizationName: IFCA
+address: None
+deliveryPoint: Avda Castros s/n
+city: Santander
+postalCode: 39005
+country: Spain
+electronicMailAddress: marco@ifca.unican.es
+associatedParty: None
+individualName: None
+givenName: Fernando
+surName: Aguilar
+organizationName: IFCA
+address: None
+deliveryPoint: Avda Castros s/n
+city: Santander
+postalCode: 39005
+country: Spain
+electronicMailAddress: aguilarf@ifca.unican.es
+role: guardian
+abstract: None
+para: The CTD 60 is a precision probe for oceanographic and limnological measurements of physical, chemical and optical parameters up to a depth of 2000 m. It allows the simultaneous measurement of following parameters: Pressure (depth), temperature, conductivity, raw O2, REDOX, dissolved oxygen, pH, Oxigen Saturation, Salinity.
+keywordSet: None
+keyword: measure
+keyword: water reservoir
+keyword: sensor
+keyword: physical and chemical parameters
+coverage: None
+geographicCoverage: None
+geographicDescription: water reservoir
+boundingCoordinates: None
+westBoundingCoordinate: -3.75
+eastBoundingCoordinate: -2.375
+northBoundingCoordinate: 42.0
+southBoundingCoordinate: 40.875
+temporalCoverage: None
+rangeOfDates: None
+beginDate: None
+calendarDate: 2010
+endDate: None
+calendarDate: 2010
+contact: None
+individualName: None
+givenName: Daniel
+surName: Garcia
+organizationName: IFCA
+address: None
+deliveryPoint: Avda Castros S/N
+city: Santander
+postalCode: 39005
+country: Spain
+electronicMailAddress: garciad@ifca.unican.es
+methods: None
+methodStep: None
+description: None
+section: None
+title: stationary measures
+para: measures taken at a stationary depth of about 4 meters with a CTD 60. Measurements of physical, chemical and optical parameter.
+instrumentation: CTD60M-Probe. It allows the simultaneous measurement of following parameters: Pressure (depth), temperature, conductivity, raw O2, REDOX, dissolved oxygen, pH, Oxigen Saturation, Salinity.
+dataTable: None
+entityName: AMT
+entityDescription: Measurement of following parameters: Pressure (depth), temperature, conductivity, raw O2, REDOX, dissolved oxygen, pH, Oxigen Saturation, Salinity.
+physical: 
+
+objectName: amt.csv
+size: 4275737
+authentication: f38ded28383d9f69af7cb9c98aed798b
+encodingMethod: ASCII text
+characterEncoding: us-ascii
+dataFormat:  
+
+textFormat: 
+
+numHeaderLines: 1
+numFooterLines: 0
+attributeOrientation: column
+simpleDelimited: 
+
+fieldDelimiter: ;
+quoteCharacter: "
+recordDelimiter: \textbackslash{}n
+physicalLineDelimiter: \textbackslash{}n
+distribution: 
+
+online: 
+
+url: http://doriiie02.ifca.es/datasets/amt.csv
+project: 
+
+researchProjectType: 
+
+title: ROEM +
+personnel: Agustin Monteoliva
+abstract: Life + Project{\ldots} eutrophication
+funding: EC
+studyAreaDescription: 
+
+descriptor: Ecology
+attributeList: 
+
+
+attribute: 
+
+attributeName: date
+attributeLabel: date
+attributeDefinition: date of measure
+storageType: string
+measurementScale: 
+
+dateTime: 
+
+formatString: YYYY-MM-DD , hh:mm
+dateTimePrecision: 1
+dateTimeDomain: 
+ 
+bounds: 
+
+minimum: 2010-01-01 , 00:00
+maximum: 2016-12-31 , 23:59
+attribute: None
+attributeName: Temperature
+attributeLabel: Temp
+attributeDefinition: Temperature
+storageType: double
+measurementScale: 
+
+ratio: 
+
+unit: 
+
+standardUnit: celsius
+precision: 0.01
+numericDomain: 
+
+numberType: real
+bounds: 
+
+minimum: -2.0
+maximum: 32.0
+method: 
+
+qualityControl: 
+
+description: 
+
+para: This parameter is filtered from raw when value is less than -1.0 or higher than 35.0
+software: 
+
+references: 1827473819284
+methodStep: 
+
+description: 
+
+para: Temperature calibration
+protocol: 
+
+proceduralStep: 
+
+description: Calibration step for temperature
+attribute: None
+attributeName: Press
+attributeLabel: Press
+attributeDefinition: Press (Depth)
+storageType: double
+measurementScale: None
+interval: None
+unit: None
+customUnit: dbar
+precision: 0.1
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 0
+maximum: 50
+method: 
+
+qualityControl: 
+
+description: 
+
+para: Parameter is filtered when Press * 1.02 less than 0.0 or Press * 1.02 is higher than  30.0
+software: 
+
+references: 1827473819284
+attribute: None
+attributeName: Conductivity
+attributeLabel: Cond
+attributeDefinition: Conductivity of an electrolyte solution is a measure of its ability to conduct electricity. The SI unit of conductivity is siemens per meter (S/m).
+storageType: double
+measurementScale: None
+interval: None
+unit: None
+customUnit: mS/cm
+precision: 0.005
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 0
+maximum: 6
+method: 
+
+qualityControl: 
+
+description: 
+
+para: Parameter is filtered when is less than 0.0001 or higher than 0.3
+software: 
+
+references: 1827473819284
+attribute: None
+attributeName: Salinity
+attributeLabel: Salinity
+attributeDefinition: Salinity of water cannot be measured directly by one single sensor, it is calculated from the individual sensors for pressure, temperature and conductivity
+storageType: Double
+measurementScale: None
+interval: None
+unit: None
+customUnit: psu
+precision: 0.0001
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 0
+maximum: 0.1
+method: 
+
+qualityControl: 
+
+software: 
+
+references: 1827473819284
+attribute: None
+attributeName: Dissolved oxygen
+attributeLabel: DO
+attributeDefinition: Dissolved oxygen refers to the level of free
+storageType: double
+measurementScale: None
+interval: None
+unit: None
+standardUnit: milligramsPerLiter
+precision: 0.1
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 0
+maximum: 20
+method: 
+
+qualityControl: 
+
+description: 
+
+para: Parameter is filtered when is less than 0 and higher than 30
+software: 
+
+references: 1827473819284
+attribute: None
+attributeName: rawO2
+attributeLabel: rawO2
+attributeDefinition: dissolved oxygen
+storageType: double
+measurementScale: None
+interval: None
+unit: None
+standardUnit: dimensionless
+precision: 10
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 0
+maximum: 5000
+method: 
+
+qualityControl: 
+
+software: 
+
+references: 1827473819284
+attribute: None
+attributeName: Oxygen Saturation
+attributeLabel: OxySat
+attributeDefinition: relative measure of the amount of oxygen that is dissolved or carried in a given medium. \%
+storageType: double
+measurementScale: None
+ratio: None
+unit: None
+standardUnit: dimensionless
+precision: 1
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 0
+maximum: 120
+method: 
+
+qualityControl: 
+
+description: 
+
+para: Parameter is filtered when is less than 0  or higher than 200
+software: 
+
+references: 1827473819284
+attribute: None
+attributeName: ph
+attributeLabel: ph
+attributeDefinition: numeric scale used to specify the acidity or basicity
+storageType: double
+measurementScale: None
+ratio: None
+unit: None
+standardUnit: dimensionless
+precision: 0.1
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 4
+maximum: 10
+method: 
+
+qualityControl: 
+
+description: 
+
+para: Parameter is filtered when is less tha 5 or higher than10
+software: 
+
+references: 1827473819284
+attribute: None
+attributeName: Redox
+attributeLabel: redox
+attributeDefinition: Redox
+storageType: double
+measurementScale: None
+interval: None
+unit: None
+standardUnit: dimensionless
+precision: 10
+numericDomain: None
+numberType: real
+bounds: None
+minimum: 0
+maximum: 5000
+method: 
+
+qualityControl: 
+
+software: 
+
+references: 1827473819284
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{dataset} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{SubElement}\PY{p}{(}\PY{n}{root}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{dataset}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+description practical salinity unit
+
+    \end{Verbatim}
+
+    \hypertarget{ejercicio-personal}{%
+\section{Ejercicio personal}\label{ejercicio-personal}}
+
+    \hypertarget{ejercicio-1}{%
+\subsection{Ejercicio 1}\label{ejercicio-1}}
+
+    A partir del ejemplo completo del esquema de metadatos de DataCite,
+muestra por pantalla los elementos que sean equivalentes a los
+propuestos por Dublin Core (cada uno en una línea). Es posible que
+tengas que combinar en uno varios campos del archivo de metadatos (Por
+ejemplo, en coverage las coordenadas + el nombre).
+
+\begin{itemize}
+\tightlist
+\item
+  Title:
+\item
+  Creator:
+\item
+  Subject: ~
+\item
+  Description:
+\item
+  Publisher:
+\item
+  Contributor:
+\item
+  Date:
+\item
+  Type:
+\item
+  Format:
+\item
+  Identifier:
+\item
+  Source:
+\item
+  Language:
+\item
+  Relation:
+\item
+  Coverage: ~
+\item
+  Rights:
+\end{itemize}
+
+Recurso:
+https://schema.datacite.org/meta/kernel-3.1/example/datacite-example-full-v3.1.xml
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{xml}\PY{n+nn}{.}\PY{n+nn}{etree}\PY{n+nn}{.}\PY{n+nn}{ElementTree} \PY{k}{as} \PY{n+nn}{ET}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        
+        \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://schema.datacite.org/meta/kernel\PYZhy{}3.1/example/datacite\PYZhy{}example\PYZhy{}full\PYZhy{}v3.1.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{if} \PY{n}{response}\PY{o}{.}\PY{n}{status\PYZus{}code} \PY{o}{==} \PY{l+m+mi}{200}\PY{p}{:}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./datacite\PYZhy{}example\PYZhy{}full\PYZhy{}v3.1.xml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{content}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{ls}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+01-metadataIntro.ipynb  03-OAI-PMH-APIs.ipynb  datacite-example-full-v3.1.xml
+02-DOI.ipynb            amt\_prototype.xml      dublincore-example.xml
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{tree} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datacite\PYZhy{}example\PYZhy{}full\PYZhy{}v3.1.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{namespaces} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://datacite.org/schema/kernel\PYZhy{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:creatorName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+        
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:description}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:publisher}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:contributorName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:resourceType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:format}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:identifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Source: NA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+        
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:relatedIdentifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+        
+        \PY{n}{find1} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:geoLocationPoint}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)} 
+        \PY{n}{find2} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:geoLocationPlace}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child1}\PY{p}{,} \PY{n}{child2} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{find1}\PY{p}{,} \PY{n}{find2}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coverage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child1}\PY{o}{.}\PY{n}{text} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{child2}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+        
+        \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:rights}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{namespaces}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{http://datacite.org/schema/kernel-3\}title | Full DataCite XML Example
+\{http://datacite.org/schema/kernel-3\}title | Demonstration of DataCite Properties.
+\{http://datacite.org/schema/kernel-3\}creatorName | Miller, Elizabeth
+\{http://datacite.org/schema/kernel-3\}subject | 000 computer science
+\{http://datacite.org/schema/kernel-3\}description | 
+            XML example of all DataCite Metadata Schema v3.1 properties.
+        
+\{http://datacite.org/schema/kernel-3\}publisher | DataCite
+\{http://datacite.org/schema/kernel-3\}contributorName | Starr, Joan
+\{http://datacite.org/schema/kernel-3\}date | 2014-10-17
+\{http://datacite.org/schema/kernel-3\}resourceType | XML
+\{http://datacite.org/schema/kernel-3\}format | application/xml
+\{http://datacite.org/schema/kernel-3\}identifier | 10.5072/example-full
+Source: NA
+\{http://datacite.org/schema/kernel-3\}language | en-us
+\{http://datacite.org/schema/kernel-3\}relatedIdentifier | http://data.datacite.org/application/citeproc+json/10.5072/example-full
+\{http://datacite.org/schema/kernel-3\}relatedIdentifier | arXiv:0706.0001
+\{ http://datacite.org/schema/kernel-3 \} coverage | 31.233 -67.302, Atlantic Ocean
+\{http://datacite.org/schema/kernel-3\}relatedIdentifier | http://data.datacite.org/application/citeproc+json/10.5072/example-full
+\{http://datacite.org/schema/kernel-3\}relatedIdentifier | arXiv:0706.0001
+\{http://datacite.org/schema/kernel-3\}rights | CC0 1.0 Universal
+
+    \end{Verbatim}
+
+    \hypertarget{ejercicio-2}{%
+\subsection{Ejercicio 2}\label{ejercicio-2}}
+
+    Haz un listado de todas las etiquetas del documento XML con sus
+atributos (si lo tienen)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{tree} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datacite\PYZhy{}example\PYZhy{}full\PYZhy{}v3.1.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{root} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{getroot}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{table} \PY{o+ow}{in} \PY{n}{root}\PY{o}{.}\PY{n}{getiterator}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{child} \PY{o+ow}{in} \PY{n}{table}\PY{p}{:}
+                \PY{k}{if} \PY{n}{child}\PY{o}{.}\PY{n}{attrib} \PY{o}{!=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{attrib}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{child}\PY{o}{.}\PY{n}{tag}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'identifierType': 'DOI'\} 
+ \{http://datacite.org/schema/kernel-3\}identifier 
+
+\{http://datacite.org/schema/kernel-3\}creators 
+
+\{http://datacite.org/schema/kernel-3\}titles 
+
+\{http://datacite.org/schema/kernel-3\}publisher 
+
+\{http://datacite.org/schema/kernel-3\}publicationYear 
+
+\{http://datacite.org/schema/kernel-3\}subjects 
+
+\{http://datacite.org/schema/kernel-3\}contributors 
+
+\{http://datacite.org/schema/kernel-3\}dates 
+
+\{http://datacite.org/schema/kernel-3\}language 
+
+\{'resourceTypeGeneral': 'Software'\} 
+ \{http://datacite.org/schema/kernel-3\}resourceType 
+
+\{http://datacite.org/schema/kernel-3\}alternateIdentifiers 
+
+\{http://datacite.org/schema/kernel-3\}relatedIdentifiers 
+
+\{http://datacite.org/schema/kernel-3\}sizes 
+
+\{http://datacite.org/schema/kernel-3\}formats 
+
+\{http://datacite.org/schema/kernel-3\}version 
+
+\{http://datacite.org/schema/kernel-3\}rightsList 
+
+\{http://datacite.org/schema/kernel-3\}descriptions 
+
+\{http://datacite.org/schema/kernel-3\}geoLocations 
+
+\{http://datacite.org/schema/kernel-3\}creator 
+
+\{http://datacite.org/schema/kernel-3\}creatorName 
+
+\{'schemeURI': 'http://orcid.org/', 'nameIdentifierScheme': 'ORCID'\} 
+ \{http://datacite.org/schema/kernel-3\}nameIdentifier 
+
+\{http://datacite.org/schema/kernel-3\}affiliation 
+
+\{'\{http://www.w3.org/XML/1998/namespace\}lang': 'en-us'\} 
+ \{http://datacite.org/schema/kernel-3\}title 
+
+\{'\{http://www.w3.org/XML/1998/namespace\}lang': 'en-us', 'titleType': 'Subtitle'\} 
+ \{http://datacite.org/schema/kernel-3\}title 
+
+\{'\{http://www.w3.org/XML/1998/namespace\}lang': 'en-us', 'schemeURI': 'http://dewey.info/', 'subjectScheme': 'dewey'\} 
+ \{http://datacite.org/schema/kernel-3\}subject 
+
+\{'contributorType': 'ProjectLeader'\} 
+ \{http://datacite.org/schema/kernel-3\}contributor 
+
+\{http://datacite.org/schema/kernel-3\}contributorName 
+
+\{'schemeURI': 'http://orcid.org/', 'nameIdentifierScheme': 'ORCID'\} 
+ \{http://datacite.org/schema/kernel-3\}nameIdentifier 
+
+\{http://datacite.org/schema/kernel-3\}affiliation 
+
+\{'dateType': 'Updated'\} 
+ \{http://datacite.org/schema/kernel-3\}date 
+
+\{'alternateIdentifierType': 'URL'\} 
+ \{http://datacite.org/schema/kernel-3\}alternateIdentifier 
+
+\{'relatedIdentifierType': 'URL', 'relationType': 'HasMetadata', 'relatedMetadataScheme': 'citeproc+json', 'schemeURI': 'https://github.com/citation-style-language/schema/raw/master/csl-data.json'\} 
+ \{http://datacite.org/schema/kernel-3\}relatedIdentifier 
+
+\{'relatedIdentifierType': 'arXiv', 'relationType': 'IsReviewedBy'\} 
+ \{http://datacite.org/schema/kernel-3\}relatedIdentifier 
+
+\{http://datacite.org/schema/kernel-3\}size 
+
+\{http://datacite.org/schema/kernel-3\}format 
+
+\{'rightsURI': 'http://creativecommons.org/publicdomain/zero/1.0/'\} 
+ \{http://datacite.org/schema/kernel-3\}rights 
+
+\{'\{http://www.w3.org/XML/1998/namespace\}lang': 'en-us', 'descriptionType': 'Abstract'\} 
+ \{http://datacite.org/schema/kernel-3\}description 
+
+\{http://datacite.org/schema/kernel-3\}geoLocation 
+
+\{http://datacite.org/schema/kernel-3\}geoLocationPoint 
+
+\{http://datacite.org/schema/kernel-3\}geoLocationBox 
+
+\{http://datacite.org/schema/kernel-3\}geoLocationPlace 
+
+
+    \end{Verbatim}
+
+    \hypertarget{ejercicio-3}{%
+\subsection{Ejercicio 3}\label{ejercicio-3}}
+
+    Muestra los distintos identificadores que tiene ese documento de este
+modo: Identificador {[}tipo{]} = {[}identificador{]}
+
+Ejemplo: Identificador DOI = 10.3122/121321
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{tree} \PY{o}{=} \PY{n}{ET}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datacite\PYZhy{}example\PYZhy{}full\PYZhy{}v3.1.xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{namespaces} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://datacite.org/schema/kernel\PYZhy{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:identifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{namespaces}\PY{p}{)}
+         \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Identificador [}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{elem}\PY{o}{.}\PY{n}{attrib}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{identifierType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{] = [}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{elem}\PY{o}{.}\PY{n}{text}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{find} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.//dc:alternateIdentifier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{namespaces}\PY{p}{)}
+         \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{find}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Identificador [}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{elem}\PY{o}{.}\PY{n}{attrib}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alternateIdentifierType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{] = [}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{elem}\PY{o}{.}\PY{n}{text}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Identificador [ DOI ] = [ 10.5072/example-full ]
+Identificador [ URL ] = [ http://schema.datacite.org/schema/meta/kernel-3.1/example/datacite-example-full-v3.1.xml ]
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
